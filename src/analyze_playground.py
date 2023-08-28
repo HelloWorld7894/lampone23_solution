@@ -4,7 +4,5 @@ import skimage
 import numpy as np
 import matplotlib.pyplot as plt
 
-def main():
-    i = 10
-    i2 = 10
+def main(playground,robot,objects):
     pass
