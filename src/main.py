@@ -9,8 +9,8 @@ import matplotlib.pyplot as plt
 
 def solve():
     img = load_frame.main()
-    playground = detect_playground.main() # its return fucking 4D aray
-    robot = detect_robot.main(img) # return image with marker
+    playground = detect_playground.main(img)
+    robot = detect_robot.main(img)
     objects = recognize_objects.main(img)
     array = analyze_playground.main(playground, robot, objects)
     path = generate_path.main(array)
