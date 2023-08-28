@@ -8,13 +8,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def solve():
-    load_frame.main()
-    detect_playground.main()
-    detect_robot.main()
-    recognize_objects.main()
-    analyze_playground.main()
-    generate_path.main()
-    send_solution.main()
+    img = load_frame.main()
+    playground = detect_playground.main(img)
+    robot = detect_robot.main(img)
+    objects = recognize_objects.main(img)
+    array = analyze_playground.main(playground, robot, objects)
+    path = generate_path.main(array)
+    send_solution.main(path)
 
 
 if __name__ == "__main__":
