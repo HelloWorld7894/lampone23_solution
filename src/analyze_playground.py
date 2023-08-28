@@ -6,4 +6,5 @@ import matplotlib.pyplot as plt
 
 def main():
     i = 10
+    i2 = 10
     pass
