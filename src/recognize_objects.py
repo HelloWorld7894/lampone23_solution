@@ -19,9 +19,6 @@ def main(img, debug = False):
 
     for i in range(3):
         img_chanel = img[:,:,i]
-
-        #print(i)
-
         thresh = threshold_otsu(img_chanel)
         imgs.append(img_chanel < thresh)
         imgs_titles.append((f"{i} chanel {imgs[i].shape}"))
@@ -68,7 +65,6 @@ def main(img, debug = False):
     if debug:
         fig = plt.figure(figsize=(10, 7))
         for i in range(1,11):
-            print(i)
             fig.add_subplot(rows, columns, i)
             plt.imshow(imgs[i-1], cmap="gray")
             plt.axis('off')
@@ -80,14 +76,11 @@ def main(img, debug = False):
 
     for binary_array in insert:
 
-        # Perform connected component labeling
+
         num_labels, labels, stats, centroids = cv2.connectedComponentsWithStats(binary_array.astype(np.uint8))
 
-        # Print the number of labels found
-        #print("Number of labels:", num_labels)
-
         labels = []
-        # Print statistics for each component
+
         for label in range(1, num_labels):
             leftmost = stats[label, cv2.CC_STAT_LEFT]
             topmost = stats[label, cv2.CC_STAT_TOP]
@@ -100,10 +93,8 @@ def main(img, debug = False):
 
         output.append(labels)
 
-    print(output)
-    
-
     #print(output)
+    
     plt.show()
 
 
