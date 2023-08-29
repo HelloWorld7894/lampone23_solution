@@ -38,27 +38,14 @@ def main(img):
 
     fig.add_subplot(rows, columns, 5)
 
-    img_xor = (np.logical_xor(img_color[1], img_color[2]))
-
-    img_xor = (np.logical_xor(img_xor, img_color[0]))
-
-    plt.imshow(img_xor, cmap="gray")
-    plt.axis('off')
-    plt.title("and 1 2")
-
-
-    fig.add_subplot(rows, columns, 6)
-
     img_and = (np.logical_and(img_color[0], img_color[2]))
-
-    
 
     plt.imshow(img_and, cmap="gray")
     plt.axis('off')
     plt.title("and")
 
 
-    fig.add_subplot(rows, columns, 7)
+    fig.add_subplot(rows, columns, 6)
 
     img = (np.logical_xor(img_color[0], img_and))
     kernel = np.ones((10,10))
@@ -67,8 +54,26 @@ def main(img):
     plt.imshow(img_clear,cmap = "gray")
 
     plt.imshow(img_clear, cmap="gray")
+
+
+    fig.add_subplot(rows, columns, 8)
+
+    img_xor = (np.logical_xor(img_color[0], img_color[2]))
+
+    kernel = np.ones((10,10))
+    img_xor = scipy.signal.convolve2d(img_xor,kernel,boundary='symm')
+
+    plt.imshow(img_xor, cmap="gray")
     plt.axis('off')
-    plt.title("final")
+    plt.title("mazaní")
+
+    fig.add_subplot(rows, columns, 9)
+
+    img_xor = img_xor > 50
+
+    plt.imshow(img_xor, cmap="gray")
+    plt.axis('off')
+    plt.title("kulatý obdelníky")
     
 
     """labeling"""
@@ -81,6 +86,8 @@ def main(img):
     # Print the number of labels found
     print("Number of labels:", num_labels)
 
+    output = []
+    blue = []
     # Print statistics for each component
     for label in range(1, num_labels):
         leftmost = stats[label, cv2.CC_STAT_LEFT]
@@ -89,6 +96,7 @@ def main(img):
         height = stats[label, cv2.CC_STAT_HEIGHT]
         area = stats[label, cv2.CC_STAT_AREA]
         centroid_x, centroid_y = centroids[label]
+        blue.append([leftmost,topmost,width,height])
         print(f"Label {label}: Area={area}, Bounding Box=({leftmost}, {topmost}, {width}, {height}), Centroid=({centroid_x}, {centroid_y})")
 
 
