@@ -11,17 +11,23 @@ import scipy.signal
 def main(img):
     fig = plt.figure(figsize=(10, 7))
     rows = 3
-    columns = 2
+    columns = 3
+
+    fig.add_subplot(rows, columns, 4)
+
+    plt.imshow(img, cmap="gray")
+    plt.axis('off')
+    plt.title("orichinal")
 
     img_color = [0,0,0]
     
     for i in range(3):
-        img_crop = img[:,:,i]
+        img_chanel = img[:,:,i]
 
         print(i)
-        
-        thresh = threshold_otsu(img_crop)
-        img_color[i] = img_crop < thresh
+
+        thresh = threshold_otsu(img_chanel)
+        img_color[i] = img_chanel < thresh
 
         fig.add_subplot(rows, columns, i+1)
 
@@ -30,30 +36,34 @@ def main(img):
         plt.title(f"{i} chanel")
     
 
-    fig.add_subplot(rows, columns, 4)
+    fig.add_subplot(rows, columns, 5)
 
-    img_xor = (np.logical_xor(img_color[0], img_color[2]))
+    img_xor = (np.logical_xor(img_color[1], img_color[2]))
+
+    img_xor = (np.logical_xor(img_xor, img_color[0]))
 
     plt.imshow(img_xor, cmap="gray")
     plt.axis('off')
-    plt.title("xor")
+    plt.title("and 1 2")
 
 
-    fig.add_subplot(rows, columns, 5)
+    fig.add_subplot(rows, columns, 6)
 
     img_and = (np.logical_and(img_color[0], img_color[2]))
+
+    
 
     plt.imshow(img_and, cmap="gray")
     plt.axis('off')
     plt.title("and")
 
 
-    fig.add_subplot(rows, columns, 6)
+    fig.add_subplot(rows, columns, 7)
 
     img = (np.logical_xor(img_color[0], img_and))
     kernel = np.ones((10,10))
     img_clear = scipy.signal.convolve2d(img,kernel,boundary='symm')
-    img_clear = img_clear > 20
+    img_clear = img_clear > 40
     plt.imshow(img_clear,cmap = "gray")
 
     plt.imshow(img_clear, cmap="gray")
