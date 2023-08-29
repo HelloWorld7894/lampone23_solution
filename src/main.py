@@ -8,11 +8,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def solve():
-    img = load_frame.main("./assets/image_empty.png")
-    cv2.imshow("xd", img)
-    cv2.waitKey(0)
-
-    playground = detect_playground.main(img)
+    img = load_frame.main()
+    playground = detect_playground.main(load_frame.main("./assets/image_empty.png"))
     robot = detect_robot.main(img)
     objects = recognize_objects.main(img)
     array = analyze_playground.main(playground, robot, objects)
