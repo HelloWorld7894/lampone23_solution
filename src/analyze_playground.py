@@ -34,12 +34,14 @@ def main(playground,robot,objects):
             if rectangles_intersect((groundX,groundY,groundW,groundH), (robotX,robotY,robotW,robotH)):
                 BestArray[0][Y][X] = 1 #start
             #get Rentangle
-            # if not objects == None:
-            #     for rect in objects[0]:
-                    
-            #         if rectangles_intersect((groundX,groundY,groundW,groundH),(rect[0],rect[1],10,10)):
-            #             BestArray[0][Y][X] = 3 #Wall
-                        
+            if not objects == None:
+                for rect in objects[0]:
+                    if rectangles_intersect((groundX,groundY,groundW,groundH),(rect[0],rect[1],10,10)):
+                        BestArray[0][Y][X] = 4 #Wall
+            if not objects == None:
+                for rect in objects[1]:
+                    if rectangles_intersect((groundX,groundY,groundW,groundH),(rect[4],rect[5],10,10)):
+                        BestArray[0][Y][X] = 6 #Wall            
     #print(rect[:4])
     print(BestArray)
     return BestArray

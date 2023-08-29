@@ -27,7 +27,7 @@ def main(img):
     for i in range(3):
         img_chanel = img[:,:,i]
 
-        print(i)
+        #print(i)
 
         thresh = threshold_otsu(img_chanel)
         img_color[i] = img_chanel < thresh
@@ -116,7 +116,7 @@ def main(img):
         num_labels, labels, stats, centroids = cv2.connectedComponentsWithStats(binary_array.astype(np.uint8))
 
         # Print the number of labels found
-        print("Number of labels:", num_labels)
+        #print("Number of labels:", num_labels)
 
         labels = []
         # Print statistics for each component
@@ -128,11 +128,11 @@ def main(img):
             area = stats[label, cv2.CC_STAT_AREA]
             centroid_x, centroid_y = centroids[label]
             labels.append([leftmost,topmost,width,height,centroid_x,centroid_y])
-            print(f"Label {label}: Area={area}, Bounding Box=({leftmost}, {topmost}, {width}, {height}), Centroid=({centroid_x}, {centroid_y})")
+            #print(f"Label {label}: Area={area}, Bounding Box=({leftmost}, {topmost}, {width}, {height}), Centroid=({centroid_x}, {centroid_y})")
 
         output.append(labels)
 
-    print(output)
+    #print(output)
     plt.show()
 
 
