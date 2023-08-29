@@ -17,7 +17,7 @@ def main(img):
     
 
     for i in range(3):
-        img_crop = img[250:760,650:1333,i]
+        img_crop = img[:,:,i]
 
         print(i)
         
@@ -85,5 +85,5 @@ def main(img):
     pass
 
 if __name__ == "__main__":
-    main(skimage.io.imread("assets/image.png", as_gray=False))
+    main(skimage.io.imread("assets/image.png", as_gray=False)[250:760,650:1333,:])
 
