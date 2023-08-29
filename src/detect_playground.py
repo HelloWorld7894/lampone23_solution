@@ -42,7 +42,6 @@ def main(empty_image):
     return SortedDots
 
 
-
 if __name__ == "__main__":
     empty_image = cv.imread('assets/image_empty.png')
     
