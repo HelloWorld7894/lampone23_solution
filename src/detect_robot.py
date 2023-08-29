@@ -10,7 +10,9 @@ def main(image):
     aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50)
     parameters = cv2.aruco.DetectorParameters()
 
-    corners, ids, rejected = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
+    detector = cv2.aruco.ArucoDetector(aruco_dict, parameters)
+
+    corners, ids, rejected = detector.detectMarkers(gray)
 
     return cv2.aruco.drawDetectedMarkers(image, corners, ids) # TODO:  return just angle and rentangle 2 points 
 

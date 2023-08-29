@@ -3,20 +3,14 @@ import cv2 as cv
 import cv2.aruco as aruco
 import numpy as np
 from matplotlib import pyplot as plt
-
+import matplotlib
+matplotlib.use("TkAgg") #for linux users
 import numpy as np
 
-
-
-
-
-
-
-def main():
+def main(empty_image):
 
     # images
     #main image
-    empty_image = cv.imread('assets/image_empty.png')
 
 
     # resize img
@@ -62,9 +56,8 @@ def main():
 
 if __name__ == "__main__":
     empty_image = cv.imread('assets/image_empty.png')
-    cropped_empty_img = empty_image[275:740, 675:1300]
     
-    SortedDots = main()
+    SortedDots = main(empty_image)
     
     cropped_empty_img = cv.rectangle(cropped_empty_img, SortedDots[7][0][0], SortedDots[7][0][1], (0,0,255), 3)
     
