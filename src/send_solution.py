@@ -1,14 +1,12 @@
 import socket
 
-def main(str):
-   s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-   host ="142.168.109.22"
-   port =9999
-   s.connect((host,port))
+UDP_IP = "192.168.109.22"
+UDP_PORT = 9999
+MESSAGE = b""
 
-   s.send('e'.encode()) 
-   data = ''
-   data = s.recv(1024).decode()
-   print (data)
+print("UDP target IP: %s" % UDP_IP)
+print("UDP target port: %s" % UDP_PORT)
+print("message: %s" % MESSAGE)
 
-   s.close()
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
