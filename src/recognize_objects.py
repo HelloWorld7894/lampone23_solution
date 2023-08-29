@@ -12,8 +12,8 @@ import scipy.signal
 import test
 
 def main(img, debug = False):
-    rows = 3
-    columns = 3
+    rows = 2
+    columns = 4
     imgs = []
     imgs_inverted = []
     imgs_titles = []
@@ -29,7 +29,7 @@ def main(img, debug = False):
         imgs_inverted.append(img_chanel > thresh)
         imgs_titles.append((f"{i} chanel {imgs[i].shape}"))
     
-    #adding img and label to list so when debug is True they can be shown
+    #adding img and label to lists so when debug is True they can be displayed
     imgs.append(img)
     imgs_titles.append(f"orichinal {img.shape}")
 
@@ -37,7 +37,6 @@ def main(img, debug = False):
     #better recognition of red dots
     #geting playground without green using AND from channel 0 and 1
     #and xORing it with channel 1
-    #img_red2 = np.logical_and(np.logical_and(imgs_inverted[[0], imgs[1]),imgs[2])
     img_red = (np.logical_and(imgs[0], imgs[1]))
     img_red = (np.logical_xor(img_red, imgs[1]))
     kernel = np.ones((10,10))
@@ -84,7 +83,7 @@ def main(img, debug = False):
 
     """showing subplots for debug and development"""
     if debug:
-        fig = plt.figure(figsize=(10, 7))
+        fig = plt.figure(figsize=(13, 6))
         for i in range(1,len(imgs)+1):
             fig.add_subplot(rows, columns, i)
             plt.imshow(imgs[i-1], cmap="gray")
@@ -101,5 +100,6 @@ if __name__ == "__main__":
         "assets/image.png",
         "assets/image_empty.png"
     ]
-    main(skimage.io.imread(urls[2], as_gray=False)[270:760,650:1333,:],True)
+    for i in urls:
+        main(skimage.io.imread(i, as_gray=False)[270:760,650:1333,:],True)
 
