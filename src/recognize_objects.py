@@ -3,10 +3,13 @@ import cv2
 import skimage
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use("TkAgg")
 import time
 from skimage.filters import threshold_otsu
 import scipy.signal
 
+import test
 
 def main(img):
     fig = plt.figure(figsize=(10, 7))
@@ -132,7 +135,9 @@ def main(img):
     print(output)
     plt.show()
 
+
     return output
+
 
 if __name__ == "__main__":
     main(skimage.io.imread("assets/image.png", as_gray=False)[250:760,650:1333,:])
