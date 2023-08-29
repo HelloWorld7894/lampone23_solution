@@ -18,7 +18,7 @@ def rectangles_intersect(rect1, rect2):
     return True
 
 def main(playground,robot,objects):
-    BestAray = [np.zeros((len(playground),len(playground[0])))]
+    BestArray = [np.zeros((len(playground),len(playground[0])))]
     for Y in range(len(playground)):
         for X in range(len(playground[0])):
             #Get Ground
@@ -32,13 +32,15 @@ def main(playground,robot,objects):
             robotW = robot[0][0][3][0]-robot[0][0][1][0]
             robotH = robot[0][0][3][1]-robot[0][0][1][1]
             if rectangles_intersect((groundX,groundY,groundW,groundH), (robotX,robotY,robotW,robotH)):
-                BestAray[0][Y][X] = 1 #start
+                BestArray[0][Y][X] = 1 #start
             #get Rentangle
-            if not objects == None:
-                for rect in objects[0]:
-                    if rectangles_intersect((groundX,groundY,groundW,groundH), rect):
-                        BestAray[0][Y][X] = 3 #Wall
-    return BestAray
+            # if not objects == None:
+            #     for rect in objects[0]:
+                    
+            #         if rectangles_intersect((groundX,groundY,groundW,groundH), rect):
+            #             BestAray[0][Y][X] = 3 #Wall
+            print(objects)
+    return BestArray
             
             
        
