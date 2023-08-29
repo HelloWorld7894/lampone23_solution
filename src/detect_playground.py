@@ -8,11 +8,6 @@ matplotlib.use("TkAgg") #for linux users
 import numpy as np
 
 def main(empty_image):
-
-    # resize img
-    cropped_empty_img = empty_image[275:740, 675:1300]
-
-
     #simpling img
 
     imgray = cv.cvtColor(cropped_empty_img, cv.COLOR_BGR2GRAY)
