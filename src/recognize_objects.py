@@ -11,115 +11,76 @@ import scipy.signal
 
 import test
 
-def main(img):
-    fig = plt.figure(figsize=(10, 7))
+def main(img, debug = False):
     rows = 4
     columns = 3
+    imgs = []
+    imgs_titles = []
 
-    fig.add_subplot(rows, columns, 4)
-
-    plt.imshow(img, cmap="gray")
-    plt.axis('off')
-    plt.title("orichinal")
-
-    img_color = [0,0,0]
-    
     for i in range(3):
         img_chanel = img[:,:,i]
-
-        print(i)
-
         thresh = threshold_otsu(img_chanel)
-        img_color[i] = img_chanel < thresh
-
-        fig.add_subplot(rows, columns, i+1)
-
-        plt.imshow(img_color[i], cmap="gray")
-        plt.axis('off')
-        plt.title(f"{i} chanel")
+        imgs.append(img_chanel < thresh)
+        imgs_titles.append((f"{i} chanel {imgs[i].shape}"))
     
 
-    fig.add_subplot(rows, columns, 5)
-
-    img_and = (np.logical_and(img_color[0], img_color[2]))
-
-    plt.imshow(img_and, cmap="gray")
-    plt.axis('off')
-    plt.title("and")
+    imgs.append(img)
+    imgs_titles.append(f"orichinal {img.shape}")
 
 
-    fig.add_subplot(rows, columns, 6)
-
-    img = (np.logical_xor(img_color[0], img_and))
+    img_and = (np.logical_and(imgs[0], imgs[2]))
+    imgs.append(img_and)
+    imgs_titles.append(f"and {img_and.shape}")
+    
+    img = (np.logical_xor(imgs[0], img_and))
     kernel = np.ones((10,10))
     img_clear = scipy.signal.convolve2d(img,kernel,boundary='symm')
     img_clear = img_clear > 40
-    plt.imshow(img_clear,cmap = "gray")
+    imgs.append(img_clear)
+    imgs_titles.append(f"final {img_clear.shape}")
 
-    plt.imshow(img_clear, cmap="gray")
-    plt.axis('off')
-    plt.title("final")
-
-    fig.add_subplot(rows, columns, 7)
-
-    img_xor = (np.logical_xor(img_color[1], img_color[2]))
-
+    img_xor = (np.logical_xor(imgs[1], imgs[2]))
     img_xor = (np.logical_xor(img_xor, img_and))
+    img_xor = (np.logical_xor(img_xor, imgs[1]))
+    imgs.append(img_xor)
+    imgs_titles.append(f"and 1 2 {img_xor.shape}")
 
-    img_xor = (np.logical_xor(img_xor, img_color[1]))
-
-    plt.imshow(img_xor, cmap="gray")
-    plt.axis('off')
-    plt.title("and 1 2")
-
-    fig.add_subplot(rows, columns, 8)
-
-    img_xor = (np.logical_xor(img_color[0], img_color[2]))
-
+    img_xor = (np.logical_xor(imgs[0], imgs[2]))
     kernel = np.ones((10,10))
     img_xor = scipy.signal.convolve2d(img_xor,kernel,boundary='symm')
-
-    plt.imshow(img_xor, cmap="gray")
-    plt.axis('off')
-    plt.title("mazaní")
-
-    fig.add_subplot(rows, columns, 9)
+    imgs.append(img_xor)
+    imgs_titles.append(f"mazaní {img_xor.shape}")
 
     img_xor = img_xor > 40
-
-    plt.imshow(img_xor, cmap="gray")
-    plt.axis('off')
-    plt.title("kulatý obdelníky")
-
-
-    fig.add_subplot(rows, columns, 10)
+    imgs.append(img_xor)
+    imgs_titles.append(f"kulatý obdelníky {img_xor.shape}")
 
     img_red = (np.logical_xor(img_xor, img_clear))
-
     kernel = np.ones((20,20))
     img_red = scipy.signal.convolve2d(img_red,kernel,boundary='symm')
     img_red = img_red > 40
+    imgs.append(img_red)
+    imgs_titles.append(f"kulatý {img_red.shape}")
 
-
-    plt.imshow(img_red, cmap="gray")
-    plt.axis('off')
-    plt.title("kulatý")
-    
-
+    if debug:
+        fig = plt.figure(figsize=(10, 7))
+        for i in range(1,11):
+            fig.add_subplot(rows, columns, i)
+            plt.imshow(imgs[i-1], cmap="gray")
+            plt.axis('off')
+            plt.title(f"{imgs_titles[i-1]}")
+        plt.show()
     """labeling"""
     insert = [img_clear,img_red]
     output = []
 
     for binary_array in insert:
 
-        # Perform connected component labeling
+
         num_labels, labels, stats, centroids = cv2.connectedComponentsWithStats(binary_array.astype(np.uint8))
 
-        # Print the number of labels found
-        print("Number of labels:", num_labels)
-
         labels = []
-        # Print statistics for each component
+
         for label in range(1, num_labels):
             leftmost = stats[label, cv2.CC_STAT_LEFT]
             topmost = stats[label, cv2.CC_STAT_TOP]
@@ -128,12 +89,14 @@ def main(img):
             area = stats[label, cv2.CC_STAT_AREA]
             centroid_x, centroid_y = centroids[label]
             labels.append([leftmost,topmost,width,height,centroid_x,centroid_y])
-            print(f"Label {label}: Area={area}, Bounding Box=({leftmost}, {topmost}, {width}, {height}), Centroid=({centroid_x}, {centroid_y})")
+            #print(f"Label {label}: Area={area}, Bounding Box=({leftmost}, {topmost}, {width}, {height}), Centroid=({centroid_x}, {centroid_y})")
 
         output.append(labels)
 
-    print(output)
+    #print(output)
+    
     plt.show()
+
 
 
     return output

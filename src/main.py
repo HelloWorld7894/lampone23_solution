@@ -12,7 +12,7 @@ import sys
 
 def solve():
     img = load_frame.main()
-    playground = detect_playground.main(img)
+    playground = detect_playground.main(load_frame.main("assets/image_empty.png"))
     robot = detect_robot.main(img)
     objects = recognize_objects.main(img)
     array = analyze_playground.main(playground, robot, objects)
