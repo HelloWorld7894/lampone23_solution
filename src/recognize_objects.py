@@ -15,7 +15,6 @@ def main(img):
 
     img_color = [0,0,0]
     
-
     for i in range(3):
         img_crop = img[:,:,i]
 
@@ -54,33 +53,36 @@ def main(img):
     img = (np.logical_xor(img_color[0], img_and))
     kernel = np.ones((10,10))
     img_clear = scipy.signal.convolve2d(img,kernel,boundary='symm')
-    img_clear = img_clear > 15
+    img_clear = img_clear > 20
     plt.imshow(img_clear,cmap = "gray")
 
     plt.imshow(img_clear, cmap="gray")
     plt.axis('off')
     plt.title("final")
-    print(img_clear)
+    
+
+    """labeling"""
+
+    binary_array = img_clear
+
+    # Perform connected component labeling
+    num_labels, labels, stats, centroids = cv2.connectedComponentsWithStats(binary_array.astype(np.uint8))
+
+    # Print the number of labels found
+    print("Number of labels:", num_labels)
+
+    # Print statistics for each component
+    for label in range(1, num_labels):
+        leftmost = stats[label, cv2.CC_STAT_LEFT]
+        topmost = stats[label, cv2.CC_STAT_TOP]
+        width = stats[label, cv2.CC_STAT_WIDTH]
+        height = stats[label, cv2.CC_STAT_HEIGHT]
+        area = stats[label, cv2.CC_STAT_AREA]
+        centroid_x, centroid_y = centroids[label]
+        print(f"Label {label}: Area={area}, Bounding Box=({leftmost}, {topmost}, {width}, {height}), Centroid=({centroid_x}, {centroid_y})")
+
+
     plt.show()
-
-
-    # Find connected components in the binary image
-    num_labels, labels, stats, centroids = cv2.connectedComponentsWithStats(img_clear)
-
-    # Create a random color map for visualization
-    color_map = np.random.randint(0, 255, size=(num_labels, 3), dtype=np.uint8)
-
-    # Set background label to black (optional)
-    color_map[0] = [0, 0, 0]
-
-    # Create a colored label image
-    colored_labels = color_map[labels]
-
-    # Display the original image and the labeled image
-    cv2.imshow('Original Image', img)
-    cv2.imshow('Labeled Image', colored_labels)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
 
     pass
 
