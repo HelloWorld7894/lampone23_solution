@@ -9,10 +9,6 @@ import numpy as np
 
 def main(empty_image):
 
-    # images
-    #main image
-
-
     # resize img
     cropped_empty_img = empty_image[275:740, 675:1300]
 
