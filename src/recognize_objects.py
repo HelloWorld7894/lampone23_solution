@@ -8,8 +8,7 @@ from skimage.filters import threshold_otsu
 import scipy.signal
 
 
-def main(URL):
-
+def main(img):
     fig = plt.figure(figsize=(10, 7))
     rows = 3
     columns = 2
@@ -18,7 +17,6 @@ def main(URL):
     
 
     for i in range(3):
-        img = skimage.io.imread(URL, as_gray=False)
         img_crop = img[250:760,650:1333,i]
 
         print(i)
@@ -28,10 +26,7 @@ def main(URL):
 
         fig.add_subplot(rows, columns, i+1)
 
-        # plt.imshow(img_crop, cmap="gray")
-        # plt.colorbar()
         plt.imshow(img_color[i], cmap="gray")
-        #plt.colorbar()
         plt.axis('off')
         plt.title(f"{i} chanel")
     
@@ -58,19 +53,19 @@ def main(URL):
 
     img = (np.logical_xor(img_color[0], img_and))
     kernel = np.ones((10,10))
-    img = scipy.signal.convolve2d(img,kernel,boundary='symm')
-    img = img > 15
-    plt.imshow(img,cmap = "gray")
+    img_clear = scipy.signal.convolve2d(img,kernel,boundary='symm')
+    img_clear = img_clear > 15
+    plt.imshow(img_clear,cmap = "gray")
 
-    plt.imshow(img, cmap="gray")
+    plt.imshow(img_clear, cmap="gray")
     plt.axis('off')
     plt.title("final")
-    print(img)
+    print(img_clear)
     plt.show()
 
 
     # Find connected components in the binary image
-    num_labels, labels, stats, centroids = cv2.connectedComponentsWithStats(img)
+    num_labels, labels, stats, centroids = cv2.connectedComponentsWithStats(img_clear)
 
     # Create a random color map for visualization
     color_map = np.random.randint(0, 255, size=(num_labels, 3), dtype=np.uint8)
@@ -90,5 +85,5 @@ def main(URL):
     pass
 
 if __name__ == "__main__":
-    main("assets/image.png")
+    main(skimage.io.imread("assets/image.png", as_gray=False))
 
