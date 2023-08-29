@@ -17,7 +17,7 @@ def solve():
     objects = recognize_objects.main(img)
     array = analyze_playground.main(playground, robot, objects)
     path = generate_path.main(array)
-    #send_solution.main(path)
+    send_solution.main(path)
 
 
 if __name__ == "__main__":

@@ -10,7 +10,7 @@ import numpy as np
 def main(empty_image):
     #simpling img
 
-    imgray = cv.cvtColor(cropped_empty_img, cv.COLOR_BGR2GRAY)
+    imgray = cv.cvtColor(empty_image, cv.COLOR_BGR2GRAY)
     ret, thresh = cv.threshold(imgray, 127, 255, 0)
 
     #geting contours
