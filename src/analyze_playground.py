@@ -37,9 +37,11 @@ def main(playground,robot,objects):
             # if not objects == None:
             #     for rect in objects[0]:
                     
-            #         if rectangles_intersect((groundX,groundY,groundW,groundH), rect):
-            #             BestAray[0][Y][X] = 3 #Wall
-            print(objects)
+            #         if rectangles_intersect((groundX,groundY,groundW,groundH),(rect[0],rect[1],10,10)):
+            #             BestArray[0][Y][X] = 3 #Wall
+                        
+    #print(rect[:4])
+    print(BestArray)
     return BestArray
             
             

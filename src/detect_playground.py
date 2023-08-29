@@ -6,6 +6,7 @@ from matplotlib import pyplot as plt
 import matplotlib
 matplotlib.use("TkAgg") #for linux users
 import numpy as np
+import load_frame
 
 def main(empty_image):
     #simpling img
@@ -44,11 +45,11 @@ def main(empty_image):
 
 
 if __name__ == "__main__":
-    empty_image = cv.imread('assets/image_empty.png')
+    empty_image = load_frame.main("assets/image_empty.png")
     
     SortedDots = main(empty_image)
     
-    cropped_empty_img = cv.rectangle(empty_image, SortedDots[7][0][0], SortedDots[7][0][1], (0,0,255), 3)
+    cropped_empty_img = cv.rectangle(empty_image, SortedDots[7][7][0], SortedDots[7][7][1], (0,0,255), 3)
     
     plt.imshow(cropped_empty_img)
     plt.show()
