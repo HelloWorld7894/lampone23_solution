@@ -27,7 +27,7 @@ def main(image):
     
         # cv2.approxPloyDP() function to approximate the shape
         approx = cv2.approxPolyDP(
-            contour, 0.1 * cv2.arcLength(contour, True), True)
+            contour, 0.05 * cv2.arcLength(contour, True), True)
         
         # using drawContours() function
         cv2.drawContours(test_img, [approx], 0, (0, 0, 255), 5)
@@ -54,4 +54,5 @@ def main(image):
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
             
     cv2.imshow("test", test_img)
+    cv2.imshow("test2", image)
     cv2.waitKey(0)

@@ -8,7 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def solve():
-    img = load_frame.main("./assets/image.png")
+    img = load_frame.main()
     playground = detect_playground.main(img)
     robot = detect_robot.main(img)
     objects = recognize_objects.main(img)

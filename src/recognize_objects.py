@@ -105,10 +105,6 @@ def main(img):
 
     plt.show()
 
-    test.main(binary_array)
-
-    pass
-
 if __name__ == "__main__":
     main(skimage.io.imread("assets/image.png", as_gray=False)[250:760,650:1333,:])
 
