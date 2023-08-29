@@ -10,6 +10,10 @@ def main(image):
     parameters = cv2.aruco.DetectorParameters()
     detector = cv2.aruco.ArucoDetector(aruco_dict, parameters)
     corners, ids, rejected = detector.detectMarkers(gray)
+    if len(corners) == 0:
+        print("did not find the robot")
+        exit(1)
+    
     return corners
 
 
