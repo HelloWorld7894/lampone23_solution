@@ -53,7 +53,7 @@ def main(img):
     img = (np.logical_xor(img_color[0], img_and))
     kernel = np.ones((10,10))
     img_clear = scipy.signal.convolve2d(img,kernel,boundary='symm')
-    img_clear = img_clear > 15
+    img_clear = img_clear > 20
     plt.imshow(img_clear,cmap = "gray")
 
     plt.imshow(img_clear, cmap="gray")
