@@ -13,9 +13,11 @@ def main(image):
     detector = cv2.aruco.ArucoDetector(aruco_dict, parameters)
 
     corners, ids, rejected = detector.detectMarkers(gray)
+    print(corners)
+    print(ids)
 
-    return cv2.aruco.drawDetectedMarkers(image, corners, ids) # TODO:  return just angle and rentangle 2 points 
-
+    #return cv2.aruco.drawDetectedMarkers(image, corners, ids) # TODO:  return just angle and rentangle 2 points 
+    return corners
 
 if __name__ == "__main__":
     image = cv2.imread('assets/image.png')
