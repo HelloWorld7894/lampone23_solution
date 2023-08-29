@@ -50,5 +50,5 @@ if __name__ == "__main__":
     
     cropped_empty_img = cv.rectangle(empty_image, SortedDots[7][0][0], SortedDots[7][0][1], (0,0,255), 3)
     
-    #plt.imshow(cropped_empty_img)
-    #plt.show()
+    plt.imshow(cropped_empty_img)
+    plt.show()
