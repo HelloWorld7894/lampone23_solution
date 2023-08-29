@@ -6,9 +6,19 @@ import matplotlib.pyplot as plt
 
 def main(path = ""):
 
+    global errored
+    errored = True
+
     if len(path) == 0:
-        URL = "http://192.168.100.22/image/image.png"
-        image = skimage.io.imread(URL, as_gray=False)
+        while errored:
+            try:
+                URL = "http://192.168.100.22/image/image.png"
+                image = skimage.io.imread(URL, as_gray=False)
+                errored = False
+            except:
+                print("fetch failed")
+                errored = True
+            
     else:
         image = skimage.io.imread(path, as_gray=False)
 
