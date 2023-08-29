@@ -9,10 +9,6 @@ import numpy as np
 
 def main(empty_image):
 
-    # images
-    #main image
-
-
     # resize img
     cropped_empty_img = empty_image[275:740, 675:1300]
 
@@ -57,7 +53,7 @@ if __name__ == "__main__":
     
     SortedDots = main(empty_image)
     
-    #cropped_empty_img = cv.rectangle(cropped_empty_img, SortedDots[7][0][0], SortedDots[7][0][1], (0,0,255), 3)
+    cropped_empty_img = cv.rectangle(empty_image, SortedDots[7][0][0], SortedDots[7][0][1], (0,0,255), 3)
     
     #plt.imshow(cropped_empty_img)
     #plt.show()
