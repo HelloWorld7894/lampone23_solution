@@ -14,10 +14,11 @@ def solve():
     img = load_frame.main()
     playground = detect_playground.main(load_frame.main("assets/image_empty.png"))
     robot = detect_robot.main(img)
-    objects = recognize_objects.main(img)
+    objects = recognize_objects.main(img,True)
     array = analyze_playground.main(playground, robot, objects)
     path = generate_path.main(array)
     #send_solution.main(path)
+
 
 
 if __name__ == "__main__":
