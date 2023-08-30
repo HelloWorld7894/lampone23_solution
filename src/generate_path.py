@@ -1,6 +1,7 @@
 # other imports
 import numpy as np
 
+import translate_path
 
 def main(playground_matrix, verbose = False):
     def is_valid(x, y, matrix, visited):
@@ -57,3 +58,5 @@ def main(playground_matrix, verbose = False):
     paths = find_paths_with_cost(playground_matrix, start_pos, finish_pos)
 
     sorted_paths = sorted(paths, key=lambda x: x[1])
+
+    ideal_path = sorted_paths[0][0]
