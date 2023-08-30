@@ -5,13 +5,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 from termcolor import colored
-
+import time
 import load_frame
 
-timeout = 0
+
 
 def main(image, verbose = False):
     bot_not_found = True
+    timeout = 0
     while bot_not_found:
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50)
@@ -26,6 +27,7 @@ def main(image, verbose = False):
             if verbose:
                 print(colored("did not found the robot, repeating...", "yellow"))
             timeout += 1
+            time.sleep(1)
         else:
             if verbose:
                 print(colored("found the robot!", "green"))
