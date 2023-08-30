@@ -67,9 +67,12 @@ def main(img, debug = False):
     output = []
 
     stars = dan.main(img_red)
+    print(stars)
+
     for i, binary_array in enumerate(insert):
         num_labels, label, stats, centroids = cv2.connectedComponentsWithStats(binary_array.astype(np.uint8))
         labels = []
+        star_label = []
         for label in range(1, num_labels):
             leftmost = stats[label, cv2.CC_STAT_LEFT]
             topmost = stats[label, cv2.CC_STAT_TOP]
@@ -77,11 +80,18 @@ def main(img, debug = False):
             height = stats[label, cv2.CC_STAT_HEIGHT]
             area = stats[label, cv2.CC_STAT_AREA]
             centroid_x, centroid_y = centroids[label]
-            if area > 200:
+
+            isntstar = True
+            for star in stars:
+                if star[0] > leftmost and star[0] < leftmost + width and star[1] > topmost and star[1] < topmost + height and i == 2 and area > 200:
+                    star_label.append([leftmost,topmost,width,height,centroid_x,centroid_y])
+                    isntstar = False
+            if area > 200 and isntstar:
                 labels.append([leftmost,topmost,width,height,centroid_x,centroid_y])
                 print(f"Label {label}: Area={area}, Bounding Box=({leftmost}, {topmost}, {width}, {height}), Centroid=({centroid_x}, {centroid_y})")
         print()
         output.append(labels)
+    output.append(star_label)
 
 
     """showing subplots for debug and development"""
