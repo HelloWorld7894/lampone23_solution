@@ -36,13 +36,21 @@ def main(playground,robot,objects, debug = False):
                 print("robot cords: ", X,Y)
             #get Rentangle
             if not objects == None:
+                for rect in objects[1]:
+                    if rectangles_intersect((groundX,groundY,groundW,groundH),(rect[0],rect[1],10,10)):
+                        BestArray[0][Y][X] = 2 #Blue rects
+            if not objects == None:
                 for rect in objects[0]:
                     if rectangles_intersect((groundX,groundY,groundW,groundH),(rect[0],rect[1],10,10)):
-                        BestArray[0][Y][X] = 4 #Wall
-            #if not objects == None:
-            #     for rect in objects[1]:
-            #         if rectangles_intersect((groundX,groundY,groundW,groundH),(rect[4],rect[5],10,10)):
-            #             BestArray[0][Y][X] = 6 #Wall            
+                        BestArray[0][Y][X] = 3 #Blue rects 
+            if not objects == None:
+                for rect in objects[2]:
+                    if rectangles_intersect((groundX,groundY,groundW,groundH),(rect[0],rect[1],10,10)):
+                        BestArray[0][Y][X] = 4 #Blue rects
+            if not objects == None:
+                for rect in objects[3]:
+                    if rectangles_intersect((groundX,groundY,groundW,groundH),(rect[0],rect[1],10,10)):
+                        BestArray[0][Y][X] = 5 #Blue rects   
     #print(rect[:4])
     
     print(BestArray)
