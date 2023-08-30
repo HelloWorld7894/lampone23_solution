@@ -8,7 +8,7 @@ matplotlib.use("TkAgg")
 import load_frame
 from skimage.filters import threshold_otsu
 import scipy.signal
-import colorama
+import termcolor
 
 import recognize_same_color as dan
 
@@ -89,7 +89,7 @@ def main(img, verbose = False):
                     isntstar = False
             if area > 200 and isntstar:
                 labels.append([round(centroid_x),round(centroid_y),leftmost,topmost,width,height])
-                if debug:
+                if verbose:
                     print(f"Label {label}: Area={area}, Bounding Box=({leftmost}, {topmost}, {width}, {height}), Centroid=({centroid_x}, {centroid_y})")
         print()
         output.append(labels)
