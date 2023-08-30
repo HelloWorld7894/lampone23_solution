@@ -64,7 +64,6 @@ if __name__ == "__main__":
     detector = cv2.aruco.ArucoDetector(aruco_dict, parameters)
 
     corners, ids, rejected = detector.detectMarkers(gray)
-    print(corners[0][0])
 
 
     image_with_markers = cv2.aruco.drawDetectedMarkers(image, corners, ids)
