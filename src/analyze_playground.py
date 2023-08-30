@@ -17,7 +17,7 @@ def rectangles_intersect(rect1, rect2):
 
     return True
 
-def main(playground,robot,objects):
+def main(playground,robot,objects, debug = False):
     BestArray = [np.zeros((len(playground),len(playground[0])))]
     for Y in range(len(playground)):
         for X in range(len(playground[0])):

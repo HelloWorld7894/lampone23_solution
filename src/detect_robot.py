@@ -7,7 +7,7 @@ import math
 import load_frame
 
 
-def main(image):
+def main(image, debug = False):
     bot_not_found = True
     while bot_not_found:
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
