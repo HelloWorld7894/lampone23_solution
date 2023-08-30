@@ -4,7 +4,7 @@ import skimage
 import numpy as np
 import matplotlib.pyplot as plt
 import math
-
+import load_frame
 
 
 def main(image, debug = False):
@@ -23,7 +23,6 @@ def main(image, debug = False):
 
     corners = corners[0][0].astype(np.int32)
 
-    print(corners)
     #cv2.line(image, (corners[0][0], corners[0][1]), (corners[1][0], corners[1][1]), (0, 255, 0), 3) 
     
     angle = ""
@@ -55,7 +54,7 @@ def main(image, debug = False):
 
 # just test to see
 if __name__ == "__main__":
-    image = cv2.imread('assets/image.png')
+    image = load_frame.main()
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50)
@@ -64,7 +63,6 @@ if __name__ == "__main__":
     detector = cv2.aruco.ArucoDetector(aruco_dict, parameters)
 
     corners, ids, rejected = detector.detectMarkers(gray)
-    print(corners[0][0])
 
 
     image_with_markers = cv2.aruco.drawDetectedMarkers(image, corners, ids)
