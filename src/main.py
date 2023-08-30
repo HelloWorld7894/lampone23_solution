@@ -36,7 +36,7 @@ def solve():
         
     fig, axs = plt.subplots(2, 3, figsize=(15, 10))
     
-    img = load_frame.main(verbose=logging)
+    img = load_frame.main("assets/", verbose=logging)
     empty_image = load_frame.main("assets/image_empty.png")
     img_log = np.zeros((640, 480, 3))
 
