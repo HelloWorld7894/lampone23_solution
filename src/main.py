@@ -65,9 +65,9 @@ def solve():
     #send_solution.main(path)
     plt.tight_layout()
     plt.show()
-
-    cv2.imshow("logging", img_log)
-    cv2.waitKey(0)
+    if logging:
+        cv2.imshow("logging", img_log)
+        cv2.waitKey(0)
 
 
 if __name__ == "__main__":
