@@ -29,23 +29,21 @@ def solve():
     #some logging stuff
     global logging
     args = parser.parse_args()
-    print(args.v)
-
     if args.v:
         logging = True
-
-    img = load_frame.main(PATH + "/assets/image_all.png")
-    img_log = img.copy()
-
-    playground = detect_playground.main(img, logging)
-    robot = detect_robot.main(img, logging)
-    objects = recognize_objects.main(img, logging)
-    array = analyze_playground.main(playground, robot, objects, logging)
-    path = generate_path.main(array, logging)
+        
+    fig, axs = plt.subplots(1, 2, figsize=(10, 5))
     
+    img = load_frame.main()
+    empty_image = load_frame.main("assets/image_empty.png")
+    playground = detect_playground.main(empty_image, logging, axs)
+    robot = detect_robot.main(img, logging, axs)
+    objects = recognize_objects.main(img, logging, axs)
+    array = analyze_playground.main(playground, robot, objects, logging, axs)
+    #path = generate_path.main(array, logging)
+    #send_solution.main(path)
     cv2.imshow("logging", img)
     cv2.waitKey(0)
-    #send_solution.main(path)
 
 
 

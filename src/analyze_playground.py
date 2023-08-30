@@ -33,17 +33,19 @@ def main(playground,robot,objects, debug = False):
             robotH = robot[0][3][1]-robot[0][1][1]
             if rectangles_intersect((groundX,groundY,groundW,groundH), (robotX,robotY,robotW,robotH)):
                 BestArray[0][Y][X] = 1 #start
+                print("robot cords: ", X,Y)
             #get Rentangle
-            # if not objects == None:
-            #     for rect in objects[0]:
-            #         if rectangles_intersect((groundX,groundY,groundW,groundH),(rect[0],rect[1],10,10)):
-            #             BestArray[0][Y][X] = 4 #Wall
-            # if not objects == None:
+            if not objects == None:
+                for rect in objects[0]:
+                    if rectangles_intersect((groundX,groundY,groundW,groundH),(rect[0],rect[1],10,10)):
+                        BestArray[0][Y][X] = 4 #Wall
+            #if not objects == None:
             #     for rect in objects[1]:
             #         if rectangles_intersect((groundX,groundY,groundW,groundH),(rect[4],rect[5],10,10)):
             #             BestArray[0][Y][X] = 6 #Wall            
     #print(rect[:4])
-
+    
+    print(BestArray)
     return BestArray[0]
             
             
