@@ -84,11 +84,12 @@ def main(img, debug = False):
             isntstar = True
             for star in stars:
                 if star[0] > leftmost and star[0] < leftmost + width and star[1] > topmost and star[1] < topmost + height and i == 2 and area > 200:
-                    star_label.append([leftmost,topmost,width,height,centroid_x,centroid_y])
+                    star_label.append([round(centroid_x),round(centroid_y),leftmost,topmost,width,height])
                     isntstar = False
             if area > 200 and isntstar:
-                labels.append([round(centroid_x),round(centroid_y)])
-                print(f"Label {label}: Area={area}, Bounding Box=({leftmost}, {topmost}, {width}, {height}), Centroid=({centroid_x}, {centroid_y})")
+                labels.append([round(centroid_x),round(centroid_y),leftmost,topmost,width,height])
+                if debug:
+                    print(f"Label {label}: Area={area}, Bounding Box=({leftmost}, {topmost}, {width}, {height}), Centroid=({centroid_x}, {centroid_y})")
         print()
         output.append(labels)
     output.append(star_label)
@@ -114,6 +115,22 @@ def main(img, debug = False):
 
     return output
 
+def visualisation(img, x):
+    bgr_img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+    objects = ["ctverecek","ctverecek","ctverecek","hvezdicka"]
+    barvicky = [(255,0,0),(0,255,0),(0,0,255),(0,0,255)]
+    thickness = 2
+
+    for i in range(len(x)):
+        for j in x[i]:
+            cv2.rectangle(bgr_img, (j[2], j[3]),(j[2]+j[4], j[3]+j[5]), barvicky[i], thickness)
+            text_position = (j[2], j[3]+j[5]+10)
+            font = cv2.FONT_HERSHEY_SIMPLEX
+            font_scale = 1/2
+            cv2.putText(bgr_img, objects[i], text_position, font, font_scale, barvicky[i], 1)
+
+    return bgr_img
+
 if __name__ == "__main__":
     # urls = [
     #     "assets/image_all.png"
@@ -123,6 +140,13 @@ if __name__ == "__main__":
     # ]
     # for i in urls:
     #     main(skimage.io.imread(i, as_gray=False)[270:760,650:1333,:],True)
+
     img = load_frame.main()
-    x = main(img,True)
+    x = main(img,False)
+    img_out = visualisation(img,x)
+
+    cv2.imshow('bleueh',img_out)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+    
 

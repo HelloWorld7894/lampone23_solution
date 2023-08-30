@@ -40,20 +40,20 @@ def main(image):
             x = int(M['m10']/M['m00'])
             y = int(M['m01']/M['m00'])
     
-        # putting shape name at center of each shape
-        if len(approx) == 3: #cls 1
-            cv2.putText(test_img, 'trojuhelnik', (x, y),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
-        elif len(approx) == 4:
-            cv2.putText(test_img, 'ctverec', (x, y),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
-        elif len(approx) == 5:
-            starts_centroid.append((x, y))
-            cv2.putText(test_img, 'hvezda', (x, y),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
-        else:
-            cv2.putText(test_img, 'kruh', (x, y),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+            # putting shape name at center of each shape
+            if len(approx) == 3: #cls 1
+                cv2.putText(test_img, 'trojuhelnik', (x, y),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+            elif len(approx) == 4:
+                cv2.putText(test_img, 'ctverec', (x, y),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+            elif len(approx) == 5:
+                starts_centroid.append((x, y))
+                cv2.putText(test_img, 'hvezda', (x, y),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+            else:
+                cv2.putText(test_img, 'kruh', (x, y),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
 
     return starts_centroid
 
