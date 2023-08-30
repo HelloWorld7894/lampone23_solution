@@ -34,7 +34,7 @@ class NodeType(Enum):
     END = 2
     WALL = 3
 
-def main(array):
+def main(array, debug = False):
     array = np.array(
         [[0, 0, 0, 0, 0, 0, 0, 2],
          [0, 0, 0, 0, 0, 0, 0, 0],

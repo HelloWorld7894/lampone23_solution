@@ -8,7 +8,7 @@ matplotlib.use("TkAgg") #for linux users
 import numpy as np
 import load_frame
 
-def main(empty_image):
+def main(empty_image, debug = False):
     #simpling img
 
     imgray = cv.cvtColor(empty_image, cv.COLOR_BGR2GRAY)
