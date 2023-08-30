@@ -116,7 +116,7 @@ def main(img, verbose = False):
 
     return output, visualisation(img,output)
 
-def visualisation(img, x):
+def visualisation(img, x, bgr = False):
     bgr_img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
     objects = ["ctverecek","ctverecek","ctverecek","hvezdicka"]
     barvicky = [(255,0,0),(0,255,0),(0,0,255),(0,0,255)]
@@ -129,8 +129,10 @@ def visualisation(img, x):
             font = cv2.FONT_HERSHEY_SIMPLEX
             font_scale = 1/2
             cv2.putText(bgr_img, objects[i], text_position, font, font_scale, barvicky[i], 1)
-
-    return bgr_img
+    if bgr:
+        return bgr_img
+    else:
+        return cv2.cvtColor(bgr_img, cv2.COLOR_BGR2RGB)
 
 if __name__ == "__main__":
     # urls = [
@@ -145,7 +147,7 @@ if __name__ == "__main__":
     img = load_frame.main()
     x, y = main(img,False)
 
-    img_out = visualisation(img,x)
+    img_out = visualisation(img,x,True)
 
     cv2.imshow('bleueh',img_out)
     cv2.waitKey(0)
