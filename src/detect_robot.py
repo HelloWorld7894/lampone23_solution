@@ -5,9 +5,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 
-bot_not_found = True
+
 
 def main(image):
+    bot_not_found = True
     while bot_not_found:
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50)
