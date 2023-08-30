@@ -36,7 +36,7 @@ def main(path = ""):
         X1 = x + margin
         Y1 = y + margin
 
-        X2 = x + w - margin
+        X2 = x + w - margin - 15
         Y2 = y + h - margin
 
         return image[Y1:Y2, X1:X2]

@@ -9,7 +9,7 @@ import time
 from skimage.filters import threshold_otsu
 import scipy.signal
 
-import test
+import recognize_same_color as dan
 
 def main(img, debug = False):
     rows = 2
@@ -37,11 +37,12 @@ def main(img, debug = False):
     #better recognition of red dots
     #geting playground without green using AND from channel 0 and 1
     #and xORing it with channel 1
-    img_red = (np.logical_and(imgs[0], imgs[1]))
-    img_red = (np.logical_xor(img_red, imgs[1]))
-    kernel = np.ones((10,10))
+    # img_red = (np.logical_and(imgs[0], imgs[1]))
+    # img_red = (np.logical_xor(img_red, imgs[1]))
+    img_red = np.logical_and(np.logical_and(imgs_inverted[0], imgs[1]),imgs[2])
+    kernel = np.ones((5,5))
     img_red = scipy.signal.convolve2d(img_red,kernel,boundary='symm')
-    img_red = img_red > 40
+    img_red = img_red > 20
     imgs.append(img_red)
     imgs_titles.append(f"red {img_red.shape}")
 
@@ -62,11 +63,12 @@ def main(img, debug = False):
     imgs_titles.append(f"blue {img_blue.shape}")
     
     """labeling"""
-    insert = [img_blue,img_red,img_green]
+    insert = [img_blue,img_green,img_red]
     output = []
 
-    for binary_array in insert:
-        num_labels, labels, stats, centroids = cv2.connectedComponentsWithStats(binary_array.astype(np.uint8))
+    stars = dan.main(img_red)
+    for i, binary_array in enumerate(insert):
+        num_labels, label, stats, centroids = cv2.connectedComponentsWithStats(binary_array.astype(np.uint8))
         labels = []
         for label in range(1, num_labels):
             leftmost = stats[label, cv2.CC_STAT_LEFT]
@@ -75,14 +77,23 @@ def main(img, debug = False):
             height = stats[label, cv2.CC_STAT_HEIGHT]
             area = stats[label, cv2.CC_STAT_AREA]
             centroid_x, centroid_y = centroids[label]
-            labels.append([leftmost,topmost,width,height,centroid_x,centroid_y])
-            print(f"Label {label}: Area={area}, Bounding Box=({leftmost}, {topmost}, {width}, {height}), Centroid=({centroid_x}, {centroid_y})")
+            if area > 200:
+                labels.append([leftmost,topmost,width,height,centroid_x,centroid_y])
+                print(f"Label {label}: Area={area}, Bounding Box=({leftmost}, {topmost}, {width}, {height}), Centroid=({centroid_x}, {centroid_y})")
         print()
         output.append(labels)
 
 
     """showing subplots for debug and development"""
     if debug:
+        for i in output:
+            print("[", end="")
+            for j in i:
+                print(j)
+            print(len(i))
+            print("]")
+            print()
+
         fig = plt.figure(figsize=(13, 6))
         for i in range(1,len(imgs)+1):
             fig.add_subplot(rows, columns, i)
@@ -91,11 +102,11 @@ def main(img, debug = False):
             plt.title(f"{imgs_titles[i-1]}")
         plt.show()
 
-    #print(output)
     return output
 
 if __name__ == "__main__":
     urls = [
+        "assets/image_all.png"
         "assets/imagewgreen.png",
         "assets/image.png",
         "assets/image_empty.png"
