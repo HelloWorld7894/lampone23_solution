@@ -9,6 +9,7 @@ import numpy as np
 import load_frame
 
 def main(empty_image, debug = False):
+    
     #simpling img
 
     imgray = cv.cvtColor(empty_image, cv.COLOR_BGR2GRAY)
@@ -40,7 +41,10 @@ def main(empty_image, debug = False):
             Xsort = Ysort[i*8:i*8+8]
         Xsort.sort(key=lambda x: (x[0][0]))
         SortedDots.append(Xsort)
-    return SortedDots
+    for x in range(8):
+        for y in range(8):
+            return_img = cv.rectangle(empty_image, SortedDots[y][x][0], SortedDots[y][x][1], (0,0,255), 3)
+    return SortedDots, return_img 
 
 
 if __name__ == "__main__":
