@@ -9,7 +9,7 @@ import time
 from skimage.filters import threshold_otsu
 import scipy.signal
 
-import test
+import recognize_same_color as dan
 
 def main(img, debug = False):
     rows = 2
@@ -69,7 +69,7 @@ def main(img, debug = False):
     for i, binary_array in enumerate(insert):
         num_labels, label, stats, centroids = cv2.connectedComponentsWithStats(binary_array.astype(np.uint8))
         labels = []
-        test.main(binary_array)
+        dan.main(binary_array)
         for label in range(1, num_labels):
             leftmost = stats[label, cv2.CC_STAT_LEFT]
             topmost = stats[label, cv2.CC_STAT_TOP]
