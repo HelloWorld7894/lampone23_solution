@@ -43,8 +43,8 @@ def main(playground,robot,objects, debug = False):
             #         if rectangles_intersect((groundX,groundY,groundW,groundH),(rect[4],rect[5],10,10)):
             #             BestArray[0][Y][X] = 6 #Wall            
     #print(rect[:4])
-    print(BestArray)
-    return BestArray
+
+    return BestArray[0]
             
             
        
