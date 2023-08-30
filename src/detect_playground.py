@@ -47,8 +47,9 @@ if __name__ == "__main__":
     empty_image = load_frame.main("assets/image_empty.png")
     
     SortedDots = main(empty_image)
-    
-    cropped_empty_img = cv.rectangle(empty_image, SortedDots[7][7][0], SortedDots[7][7][1], (0,0,255), 3)
+    for x in range(8):
+        for y in range(8):
+            cropped_empty_img = cv.rectangle(empty_image, SortedDots[y][x][0], SortedDots[y][x][1], (0,0,255), 3)
     
     plt.imshow(cropped_empty_img)
     plt.show()
