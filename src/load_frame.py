@@ -4,7 +4,7 @@ import skimage
 import numpy as np
 import matplotlib.pyplot as plt
 
-def main(path = ""):
+def main(path = "", debug = False):
 
     global errored
     errored = True
@@ -15,6 +15,7 @@ def main(path = ""):
                 URL = "http://192.168.100.22/image/image.png"
                 image = skimage.io.imread(URL, as_gray=False)
                 errored = False
+                print("fetch succeeded")
             except:
                 print("fetch failed")
                 errored = True
