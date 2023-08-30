@@ -27,10 +27,10 @@ def main(playground,robot,objects):
             groundW = playground[Y][X][1][0]-playground[Y][X][0][0]
             groundH = playground[Y][X][1][1]-playground[Y][X][0][1]
             #Get Robot
-            robotX = robot[0][0][1][0]
-            robotY = robot[0][0][1][1]
-            robotW = robot[0][0][3][0]-robot[0][0][1][0]
-            robotH = robot[0][0][3][1]-robot[0][0][1][1]
+            robotX = robot[0][0][0][1][0]
+            robotY = robot[0][0][0][1][1]
+            robotW = robot[0][0][0][3][0]-robot[0][0][0][1][0]
+            robotH = robot[0][0][0][3][1]-robot[0][0][0][1][1]
             if rectangles_intersect((groundX,groundY,groundW,groundH), (robotX,robotY,robotW,robotH)):
                 BestArray[0][Y][X] = 1 #start
             #get Rentangle

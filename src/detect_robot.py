@@ -31,27 +31,20 @@ def main(image):
     d_x = x1 - x2
     d_y = y1 - y2
 
-    print("dx:" + str(d_x))
-    print("dy: " + str(d_y))
-
-    if math.floor(d_x) == 0:
+    if math.floor(d_x / image.shape[1]) == 0:
         #right or left
-        if d_y < 0:
+        if d_y > 0:
             angle = "L"
         else:
             angle = "R"
-    if math.floor(d_y) == 0:
+    if math.floor(d_y / image.shape[0]) == 0:
         #up or down
-        if d_x < 0:
+        if d_x > 0:
             angle = "U"
         else:
             angle = "D"
 
-    print(angle)
-
-    cv2.imshow("img", image)
-    cv2.waitKey(0)
-    return corners
+    return [corners, angle]
 
 
 # just test to see
