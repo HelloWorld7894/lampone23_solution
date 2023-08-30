@@ -113,7 +113,7 @@ def main(img, debug = False):
             plt.title(f"{imgs_titles[i-1]}")
         plt.show()
 
-    return output
+    return output, visualisation(img,output)
 
 def visualisation(img, x):
     bgr_img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
@@ -140,9 +140,10 @@ if __name__ == "__main__":
     # ]
     # for i in urls:
     #     main(skimage.io.imread(i, as_gray=False)[270:760,650:1333,:],True)
-
+    
     img = load_frame.main()
-    x = main(img,False)
+    x, y = main(img,False)
+
     img_out = visualisation(img,x)
 
     cv2.imshow('bleueh',img_out)
