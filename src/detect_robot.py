@@ -23,7 +23,6 @@ def main(image, debug = False):
 
     corners = corners[0][0].astype(np.int32)
 
-    print(corners)
     #cv2.line(image, (corners[0][0], corners[0][1]), (corners[1][0], corners[1][1]), (0, 255, 0), 3) 
     
     angle = ""
