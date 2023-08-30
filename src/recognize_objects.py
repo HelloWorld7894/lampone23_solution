@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
 matplotlib.use("TkAgg")
-import time
+import load_frame
 from skimage.filters import threshold_otsu
 import scipy.signal
 
@@ -87,7 +87,7 @@ def main(img, debug = False):
                     star_label.append([leftmost,topmost,width,height,centroid_x,centroid_y])
                     isntstar = False
             if area > 200 and isntstar:
-                labels.append([leftmost,topmost,width,height,centroid_x,centroid_y])
+                labels.append([round(centroid_x),round(centroid_y)])
                 print(f"Label {label}: Area={area}, Bounding Box=({leftmost}, {topmost}, {width}, {height}), Centroid=({centroid_x}, {centroid_y})")
         print()
         output.append(labels)
@@ -115,12 +115,14 @@ def main(img, debug = False):
     return output
 
 if __name__ == "__main__":
-    urls = [
-        "assets/image_all.png"
-        "assets/imagewgreen.png",
-        "assets/image.png",
-        "assets/image_empty.png"
-    ]
-    for i in urls:
-        main(skimage.io.imread(i, as_gray=False)[270:760,650:1333,:],True)
+    # urls = [
+    #     "assets/image_all.png"
+    #     "assets/imagewgreen.png",
+    #     "assets/image.png",
+    #     "assets/image_empty.png"
+    # ]
+    # for i in urls:
+    #     main(skimage.io.imread(i, as_gray=False)[270:760,650:1333,:],True)
+    img = load_frame.main()
+    x = main(img,True)
 
