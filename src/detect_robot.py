@@ -4,10 +4,11 @@ import skimage
 import numpy as np
 import matplotlib.pyplot as plt
 import math
+from termcolor import colored
 
+timeout = 0
 
-
-def main(image, debug = False):
+def main(image, verbose = False):
     bot_not_found = True
     while bot_not_found:
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -16,15 +17,19 @@ def main(image, debug = False):
         detector = cv2.aruco.ArucoDetector(aruco_dict, parameters)
         corners, ids, rejected = detector.detectMarkers(gray)
         if len(corners) == 0:
-            print("did not found the robot")
+            if timeout == 5:
+                if verbose:
+                    print(colored("timeout limit exceeded, aborting", "red"))
+                exit(1)
+            if verbose:
+                print(colored("did not found the robot, repeating...", "yellow"))
+            timeout += 1
         else:
-            print("found the robot")
+            if verbose:
+                print(colored("found the robot!", "green"))
             bot_not_found = False
 
     corners = corners[0][0].astype(np.int32)
-
-    print(corners)
-    #cv2.line(image, (corners[0][0], corners[0][1]), (corners[1][0], corners[1][1]), (0, 255, 0), 3) 
     
     angle = ""
 
@@ -49,6 +54,11 @@ def main(image, debug = False):
             angle = "U"
         else:
             angle = "D"
+
+    if verbose:
+        print("Robot parameters are:")
+        print("Coordinations: ", corners)
+        print("Heading: ", angle)
 
     return [corners, angle]
 

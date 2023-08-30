@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 import sys
 import argparse
 import os
+import termcolor
 
 PATH = os.getcwd()
 
@@ -29,13 +30,13 @@ def solve():
     #some logging stuff
     global logging
     args = parser.parse_args()
-    print(args.v)
 
     if args.v:
         logging = True
+        print("Logging set to true")
 
-    img = load_frame.main(PATH + "/assets/image_all.png")
-    img_log = img.copy()
+    img = load_frame.main(PATH + "/assets/image_all.png", logging)
+    img_log = np.zeros((640, 480, 3))
 
     playground = detect_playground.main(img, logging)
     robot = detect_robot.main(img, logging)
@@ -43,8 +44,9 @@ def solve():
     array = analyze_playground.main(playground, robot, objects, logging)
     path = generate_path.main(array, logging)
     
-    cv2.imshow("logging", img)
+    cv2.imshow("logging", img_log)
     cv2.waitKey(0)
+
     #send_solution.main(path)
 
 

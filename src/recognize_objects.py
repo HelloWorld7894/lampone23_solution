@@ -8,10 +8,11 @@ matplotlib.use("TkAgg")
 import time
 from skimage.filters import threshold_otsu
 import scipy.signal
+import colorama
 
 import recognize_same_color as dan
 
-def main(img, debug = False):
+def main(img, verbose = False):
     rows = 2
     columns = 4
     imgs = []
@@ -85,7 +86,7 @@ def main(img, debug = False):
 
 
     """showing subplots for debug and development"""
-    if debug:
+    if verbose:
         for i in output:
             print("[", end="")
             for j in i:

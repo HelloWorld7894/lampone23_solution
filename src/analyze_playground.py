@@ -3,7 +3,7 @@ import cv2
 import skimage
 import numpy as np
 import matplotlib.pyplot as plt
-
+from termcolor import colored
 
 def rectangles_intersect(rect1, rect2):
     x1, y1, w1, h1 = rect1
@@ -17,7 +17,7 @@ def rectangles_intersect(rect1, rect2):
 
     return True
 
-def main(playground,robot,objects, debug = False):
+def main(playground,robot,objects, verbose = False):
     BestArray = [np.zeros((len(playground),len(playground[0])))]
     for Y in range(len(playground)):
         for X in range(len(playground[0])):
@@ -41,9 +41,11 @@ def main(playground,robot,objects, debug = False):
             if not objects == None:
                 for rect in objects[1]:
                     if rectangles_intersect((groundX,groundY,groundW,groundH),(rect[4],rect[5],10,10)):
-                        BestArray[0][Y][X] = 6 #Wall            
-    #print(rect[:4])
-    print(BestArray)
+                        BestArray[0][Y][X] = 6 #Wall 
+
+    if verbose:
+        print(colored("analyzed playground successfully", "green"))           
+
     return BestArray
             
             
