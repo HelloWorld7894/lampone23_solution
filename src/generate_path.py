@@ -3,7 +3,8 @@ import numpy as np
 
 import translate_path
 
-def main(playground_matrix, verbose = False):
+
+def main(playground_matrix, verbose=False):
     def is_valid(x, y, matrix, visited):
         rows = matrix.shape[0]
         cols = matrix.shape[1]
@@ -45,10 +46,33 @@ def main(playground_matrix, verbose = False):
         dfs(start[0], start[1], [], 0)
         return paths
 
+    def find_nearby_bonus_nodes(node):
+        directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+
+        for dx, dy in directions:
+            rows = playground_matrix.shape[0]
+            cols = playground_matrix.shape[1]
+
+            new_x, new_y = node[0] + dx, node[1] + dy
+
+            if 0 <= new_x < rows and 0 <= new_y < cols and playground_matrix[new_x][new_y] != 4 and not (new_x, new_y) in ideal_path:
+                new_value = playground_matrix[new_x][new_y]
+
+                if new_value == 3 or new_value == 5:
+                    bonus_node = (new_x, new_y)
+
+                    bonus_nodes.append(bonus_node)
+
+                    ideal_path.insert(ideal_path.index(node) + 1, bonus_node)
+
+                    find_nearby_bonus_nodes(bonus_node)
+
+                return
+
     start_pos_raw = np.where(playground_matrix == 1)
     end_pos_raw = np.where(playground_matrix == 2)
 
-    if not start_pos_raw[0] or end_pos_raw[0]:
+    if not start_pos_raw[0] or not end_pos_raw[0]:
         print("Start or End field not found!")
         return
 
@@ -60,3 +84,9 @@ def main(playground_matrix, verbose = False):
     sorted_paths = sorted(paths, key=lambda x: x[1])
 
     ideal_path = sorted_paths[0][0]
+
+    bonus_nodes = []
+
+    for node in ideal_path:
+        find_nearby_bonus_nodes(node)
+
