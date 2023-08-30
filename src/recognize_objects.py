@@ -66,10 +66,10 @@ def main(img, debug = False):
     insert = [img_blue,img_green,img_red]
     output = []
 
+    stars = dan.main(img_red)
     for i, binary_array in enumerate(insert):
         num_labels, label, stats, centroids = cv2.connectedComponentsWithStats(binary_array.astype(np.uint8))
         labels = []
-        dan.main(binary_array)
         for label in range(1, num_labels):
             leftmost = stats[label, cv2.CC_STAT_LEFT]
             topmost = stats[label, cv2.CC_STAT_TOP]

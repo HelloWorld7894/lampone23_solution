@@ -15,6 +15,8 @@ def main(image):
     contours, _ = cv2.findContours(image, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
   
     i = 0
+
+    starts_centroid = []
     
     # list for storing names of shapes
     for contour in contours:
@@ -42,17 +44,19 @@ def main(image):
         if len(approx) == 3: #cls 1
             cv2.putText(test_img, 'trojuhelnik', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
-    
         elif len(approx) == 4:
             cv2.putText(test_img, 'ctverec', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
         elif len(approx) == 5:
+            starts_centroid.append((x, y))
             cv2.putText(test_img, 'hvezda', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
         else:
             cv2.putText(test_img, 'kruh', (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
-            
-    cv2.imshow("test", test_img)
-    cv2.imshow("test2", image)
-    cv2.waitKey(0)
+
+    return starts_centroid
+
+    #cv2.imshow("test", test_img)
+    #cv2.imshow("test2", image)
+    #cv2.waitKey(0)
