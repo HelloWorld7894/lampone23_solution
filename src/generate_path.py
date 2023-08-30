@@ -45,10 +45,14 @@ def main(playground_matrix, verbose = False):
         return paths
 
     start_pos_raw = np.where(playground_matrix == 1)
-    finish_pos_raw = np.where(playground_matrix == 2)
+    end_pos_raw = np.where(playground_matrix == 2)
+
+    if not start_pos_raw[0] or end_pos_raw[0]:
+        print("Start or End field not found!")
+        return
 
     start_pos = (start_pos_raw[0][0], start_pos_raw[1][0])
-    finish_pos = (finish_pos_raw[0][0], finish_pos_raw[1][0])
+    finish_pos = (end_pos_raw[0][0], end_pos_raw[1][0])
 
     paths = find_paths_with_cost(playground_matrix, start_pos, finish_pos)
 

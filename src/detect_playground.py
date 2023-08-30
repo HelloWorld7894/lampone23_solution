@@ -8,7 +8,9 @@ import numpy as np
 import load_frame
 from termcolor import colored
 
+
 def main(empty_image, verbose = False):
+    
     #simpling img
 
     imgray = cv.cvtColor(empty_image, cv.COLOR_BGR2GRAY)
@@ -41,9 +43,13 @@ def main(empty_image, verbose = False):
         Xsort.sort(key=lambda x: (x[0][0]))
         SortedDots.append(Xsort)
 
+    for x in range(8):
+        for y in range(8):
+            return_img = cv.rectangle(empty_image, SortedDots[y][x][0], SortedDots[y][x][1], (0,0,255), 3)
+
     if verbose:
         print(colored("background detected!", "green"))
-    return SortedDots
+    return SortedDots, return_img 
 
 
 if __name__ == "__main__":

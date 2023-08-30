@@ -30,25 +30,35 @@ def solve():
     #some logging stuff
     global logging
     args = parser.parse_args()
-
     if args.v:
         logging = True
         print("Logging set to true")
-
-    img = load_frame.main(PATH + "/assets/image_all.png", logging)
+        
+    fig, axs = plt.subplots(2, 3, figsize=(15, 10))
+    
+    img = load_frame.main(verbose=logging)
+    empty_image = load_frame.main("assets/image_empty.png")
     img_log = np.zeros((640, 480, 3))
 
-    playground = detect_playground.main(img, logging)
-    robot = detect_robot.main(img, logging)
-    objects = recognize_objects.main(img, logging)
+    axs[0][0].imshow(img)
+    axs[0][0].set_title('orichinal')
+    playground, detect_playground_img = detect_playground.main(empty_image, logging)
+    axs[0][1].imshow(detect_playground_img)
+    axs[0][1].set_title('playground_detection')
+    robot, robot_img = detect_robot.main(img, logging)
+    axs[0][2].imshow(robot_img)
+    axs[0][2].set_title('robot_detection')
+    objects, objects_img = recognize_objects.main(img, logging)
+    axs[1][0].imshow(objects_img)
+    axs[1][0].set_title('Recognize_objects')
     array = analyze_playground.main(playground, robot, objects, logging)
-    path = generate_path.main(array, logging)
-    
+    #path = generate_path.main(array, logging)
+    #send_solution.main(path)
+    plt.tight_layout()
+    plt.show()
+
     cv2.imshow("logging", img_log)
     cv2.waitKey(0)
-
-    #send_solution.main(path)
-
 
 
 if __name__ == "__main__":

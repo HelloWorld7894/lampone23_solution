@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 import math
 from termcolor import colored
 
+import load_frame
+
 timeout = 0
 
 def main(image, verbose = False):
@@ -28,9 +30,8 @@ def main(image, verbose = False):
             if verbose:
                 print(colored("found the robot!", "green"))
             bot_not_found = False
-
+    image_with_markers = cv2.aruco.drawDetectedMarkers(image, corners, ids)
     corners = corners[0][0].astype(np.int32)
-    
     angle = ""
 
     x1 = corners[0][0]
@@ -54,7 +55,6 @@ def main(image, verbose = False):
             angle = "U"
         else:
             angle = "D"
-
     if verbose:
         print("Robot parameters are:")
         print("Coordinations: ", corners)
@@ -62,10 +62,9 @@ def main(image, verbose = False):
 
     return [corners, angle]
 
-
 # just test to see
 if __name__ == "__main__":
-    image = cv2.imread('assets/image.png')
+    image = load_frame.main()
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50)
@@ -74,7 +73,6 @@ if __name__ == "__main__":
     detector = cv2.aruco.ArucoDetector(aruco_dict, parameters)
 
     corners, ids, rejected = detector.detectMarkers(gray)
-    print(corners[0][0])
 
 
     image_with_markers = cv2.aruco.drawDetectedMarkers(image, corners, ids)
