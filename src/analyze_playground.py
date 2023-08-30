@@ -33,6 +33,7 @@ def main(playground,robot,objects, debug = False):
             robotH = robot[0][3][1]-robot[0][1][1]
             if rectangles_intersect((groundX,groundY,groundW,groundH), (robotX,robotY,robotW,robotH)):
                 BestArray[0][Y][X] = 1 #start
+                print("robot cords: ", X,Y)
             #get Rentangle
             # if not objects == None:
             #     for rect in objects[0]:
