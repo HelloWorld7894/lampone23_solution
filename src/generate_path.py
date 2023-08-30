@@ -1,6 +1,7 @@
 # other imports
 import numpy as np
 
+import translate_path
 
 def main(playground_matrix, verbose = False):
     def is_valid(x, y, matrix, visited):
