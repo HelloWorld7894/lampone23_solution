@@ -2,7 +2,7 @@
 import numpy as np
 
 
-def main(playground_matrix, debug = False):
+def main(playground_matrix, verbose = False):
     def is_valid(x, y, matrix, visited):
         rows = matrix.shape[0]
         cols = matrix.shape[1]

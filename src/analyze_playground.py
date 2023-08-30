@@ -3,7 +3,7 @@ import cv2
 import skimage
 import numpy as np
 import matplotlib.pyplot as plt
-
+from termcolor import colored
 
 def rectangles_intersect(rect1, rect2):
     x1, y1, w1, h1 = rect1
@@ -17,7 +17,7 @@ def rectangles_intersect(rect1, rect2):
 
     return True
 
-def main(playground,robot,objects, debug = False):
+def main(playground,robot,objects, verbose = False):
     BestArray = [np.zeros((len(playground),len(playground[0])))]
     for Y in range(len(playground)):
         for X in range(len(playground[0])):
