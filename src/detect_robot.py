@@ -60,7 +60,7 @@ def main(image, verbose = False):
         print("Coordinations: ", corners)
         print("Heading: ", angle)
 
-    return [corners, angle]
+    return [corners, angle], image_with_markers
 
 # just test to see
 if __name__ == "__main__":
