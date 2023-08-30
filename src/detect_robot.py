@@ -5,15 +5,21 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 
+
+
 def main(image):
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50)
-    parameters = cv2.aruco.DetectorParameters()
-    detector = cv2.aruco.ArucoDetector(aruco_dict, parameters)
-    corners, ids, rejected = detector.detectMarkers(gray)
-    if len(corners) == 0:
-        print("did not find the robot")
-        exit(1)
+    bot_not_found = True
+    while bot_not_found:
+        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50)
+        parameters = cv2.aruco.DetectorParameters()
+        detector = cv2.aruco.ArucoDetector(aruco_dict, parameters)
+        corners, ids, rejected = detector.detectMarkers(gray)
+        if len(corners) == 0:
+            print("did not found the robot")
+        else:
+            print("found the robot")
+            bot_not_found = False
 
     corners = corners[0][0].astype(np.int32)
 
