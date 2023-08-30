@@ -37,7 +37,7 @@ def solve():
         
     fig, axs = plt.subplots(2, 3, figsize=(15, 10))
     
-    img = load_frame.main("assets/image.png",verbose=logging)
+    img = load_frame.main("assets/image_real.png",verbose=logging)
     empty_image = load_frame.main("assets/image_empty.png")
     img_log = np.zeros((640, 480, 3))
 
@@ -65,7 +65,7 @@ def solve():
     axs[1][1].imshow(array, cmap=cmap)
     axs[1][1].set_title('8x8 Array')
     
-    #path = generate_path.main(array, logging)
+    path = generate_path.main(array, logging)
     #send_solution.main(path)
     plt.tight_layout()
     plt.show()

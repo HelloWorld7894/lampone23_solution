@@ -38,6 +38,9 @@ def main(path = "", verbose = False):
         image = skimage.io.imread(path, as_gray=False)
         print(colored("Image loaded succesfuly", "green"))
 
+    if image.shape[2] == 4:
+        image = image[:, :, :3]
+
     imgray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
     ret, thresh = cv.threshold(imgray, 127, 255, 0)
 
