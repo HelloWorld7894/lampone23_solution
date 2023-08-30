@@ -4,7 +4,7 @@ import skimage
 import numpy as np
 import matplotlib.pyplot as plt
 import math
-
+import load_frame
 
 
 def main(image):
@@ -55,7 +55,7 @@ def main(image):
 
 # just test to see
 if __name__ == "__main__":
-    image = cv2.imread('assets/image.png')
+    image = load_frame.main()
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50)
