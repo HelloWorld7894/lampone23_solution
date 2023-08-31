@@ -69,7 +69,7 @@ def solve():
     if not send:
         send_solution.main(path)
     if True:
-        visual(img,detect_playground_img,robotImg,objects_img,array,path_img)
+        visual(img,detect_playground_img,robotImg,objects_img,array,path_img,path)
 
 if __name__ == "__main__":
     solve()
