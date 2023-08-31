@@ -105,4 +105,5 @@ class ModifiedDFS(Generic):
         return translated_path, playground_matrix_final
     
 class MyOwnSearch(Generic):
-    pass
+    def main(self):
+        pass

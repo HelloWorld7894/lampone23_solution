@@ -66,11 +66,14 @@ def solve():
     objects, objects_img = recognize_objects.main(img, logging)
     array = analyze_playground.main(playground, robot, objects, logging)
         
+
     path, path_img = ModifiedDFS(array, robot[1], logging).main()
+    if json_data["GUI"]:
+        img_for_anim = img.copy()
+        #animIMG = return_anim_images(img_for_anim, path,playground, array, robot[1])
+        visual(img,detect_playground_img,robotImg,objects_img,array,path_img,None)
+
     if not send:
         send_solution.main(path)
-    if json_data["GUI"]:
-        visual(img,detect_playground_img,robotImg,objects_img,array,path_img,path)
-
 if __name__ == "__main__":
     solve()
