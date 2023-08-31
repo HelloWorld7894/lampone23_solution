@@ -48,6 +48,7 @@ def solve():
     global logging
     global noGUI
     args = parser.parse_args()
+    
     if args.v:
         logging = True
         print("Logging set to true")
