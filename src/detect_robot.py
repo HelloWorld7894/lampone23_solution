@@ -48,15 +48,15 @@ def main(image, verbose = False):
     if math.floor(d_x / image.shape[1]) == 0:
         #right or left
         if d_y > 0:
-            angle = "L"
+            angle = "W"
         else:
-            angle = "R"
+            angle = "E"
     if math.floor(d_y / image.shape[0]) == 0:
         #up or down
         if d_x > 0:
-            angle = "U"
+            angle = "N"
         else:
-            angle = "D"
+            angle = "S"
     if verbose:
         print("Robot parameters are:")
         print("Coordinations: ", corners)

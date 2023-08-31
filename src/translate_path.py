@@ -7,6 +7,8 @@ import os
 from log import log_true, log_false, log_warn
 
 def main(heading, path_array, verbose = False):
+
+    
     curr_heading = heading
     out_string = ""
     for i, curr_coord in enumerate(path_array):
