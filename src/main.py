@@ -55,7 +55,7 @@ def solve():
 
     fig, axs = plt.subplots(2, 3, figsize=(15, 10))
 
-    img = load_frame.main(json_data["resource"], verbose=logging)
+    img = load_frame.main(PATH + json_data["resource"], verbose=logging)
     empty_image = load_frame.main(PATH + "/assets/image_empty.png")
     
     axs[0][0].imshow(img)
@@ -87,7 +87,7 @@ def solve():
         plt.show()
 
     path = generate_path.main(array, logging)
-    if send:
+    if not send:
         send_solution.main(path)
 
 
