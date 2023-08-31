@@ -12,6 +12,7 @@ import sys
 import argparse
 import os
 import termcolor
+from matplotlib.colors import ListedColormap
 
 from matplotlib.colors import ListedColormap
 import matplotlib
