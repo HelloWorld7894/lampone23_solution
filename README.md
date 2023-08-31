@@ -31,4 +31,10 @@ když je `resource` prázdný, tak se bere feed z URL, standartně je `resource`
 
 # Jak vypadá hrací pole
 
-![diagram](./assets/imagewgreen.png)
+![input](./assets/imagewgreen.png)
+
+# Output programu
+
+![output 1](./doc/Figure_1.png)
+
+![output 2](./doc/Figure_2.png)
