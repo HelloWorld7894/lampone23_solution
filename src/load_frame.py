@@ -27,10 +27,10 @@ def main(path = "", verbose = False):
                 log_true("fetch succeeded")
             except:
                 if timeout == 5:
-                    log_false("timeout limit exceeded, aborting", "red")
+                    log_false("timeout limit exceeded, aborting")
                     exit(1)
 
-                log_warn("fetch failed, repeating", "yellow")
+                log_warn("fetch failed, repeating")
                 errored = True
                 timeout += 1
             
