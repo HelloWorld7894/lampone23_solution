@@ -1,4 +1,5 @@
 {
     "verbose": false,
-    "testing": true
+    "testing": true,
+    "resource": "/assets/image.png"
 }

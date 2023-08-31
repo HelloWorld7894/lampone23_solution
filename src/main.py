@@ -55,7 +55,7 @@ def solve():
 
     
 
-    img = load_frame.main(json_data["resource"], verbose=logging)
+    img = load_frame.main(PATH + json_data["resource"], verbose=logging)
     empty_image = load_frame.main(PATH + "/assets/image_empty.png")
 
     playground, detect_playground_img = detect_playground.main(empty_image, logging)
@@ -65,8 +65,7 @@ def solve():
     array = analyze_playground.main(playground, robot, objects, logging)
         
     path = generate_path.main(array, logging)
-    
-    if send:
+    if not send:
         send_solution.main(path)
     if True:
         visual(img,detect_playground_img,robotImg,objects_img,array,path)
