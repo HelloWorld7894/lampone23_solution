@@ -46,11 +46,15 @@ else:
 def solve():
     #some logging stuff
     global logging
+    global noGUI
     args = parser.parse_args()
     if args.v:
         logging = True
         print("Logging set to true")
-
+    if args.ng:
+        noGUI = True
+        print("GUI set to False")
+        
     fig, axs = plt.subplots(2, 3, figsize=(15, 10))
 
     img = load_frame.main(PATH + "/assets/image.png", verbose=logging)
@@ -80,7 +84,7 @@ def solve():
     axs[1][1].imshow(array, cmap=cmap)
     axs[1][1].set_title('8x8 Array')
     
-    if logging:
+    if not noGUI:
 
         plt.tight_layout()
         plt.show()
