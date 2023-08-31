@@ -68,7 +68,7 @@ def main(img, verbose = False):
     output = []
 
     stars = dan.main(img_red)
-    print(stars)
+    #print(stars)
 
     for i, binary_array in enumerate(insert):
         num_labels, label, stats, centroids = cv2.connectedComponentsWithStats(binary_array.astype(np.uint8))
@@ -91,7 +91,6 @@ def main(img, verbose = False):
                 labels.append([round(centroid_x),round(centroid_y),leftmost,topmost,width,height])
                 if verbose:
                     print(f"Label {label}: Area={area}, Bounding Box=({leftmost}, {topmost}, {width}, {height}), Centroid=({centroid_x}, {centroid_y})")
-        print()
         output.append(labels)
     output.append(star_label)
 
@@ -119,7 +118,7 @@ def main(img, verbose = False):
 def visualisation(img, x, bgr = False):
     bgr_img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
     objects = ["ctverecek","ctverecek","ctverecek","hvezdicka"]
-    barvicky = [(255,0,0),(0,255,0),(0,0,255),(0,0,255)]
+    barvicky = [(255,0,0),(0,150,0),(0,0,255),(0,100,100)]
     thickness = 2
 
     for i in range(len(x)):

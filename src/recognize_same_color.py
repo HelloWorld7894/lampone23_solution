@@ -29,7 +29,7 @@ def main(image):
     
         # cv2.approxPloyDP() function to approximate the shape
         approx = cv2.approxPolyDP(
-            contour, 0.05 * cv2.arcLength(contour, True), True)
+            contour, 0.06 * cv2.arcLength(contour, True), True)
         
         # using drawContours() function
         cv2.drawContours(test_img, [approx], 0, (0, 0, 255), 5)
