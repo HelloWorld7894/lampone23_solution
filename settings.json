@@ -2,5 +2,7 @@
     "verbose": false,
     "testing": true,
     "resource": "",
-    "GUI": true
+    "GUI": true,
+    "star_threshold": 100,
+    "threshold": 200
 }
