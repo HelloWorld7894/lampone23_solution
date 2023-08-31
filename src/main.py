@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 #own imports
-import analyze_playground, detect_playground, detect_robot, load_frame, recognize_objects, send_solution
+import analyze_playground, detect_playground, detect_robot, load_frame, recognize_objects, send_solution, turtle_animation
 from generate_path import ModifiedDFS
 
 #other imports
@@ -70,6 +70,7 @@ def solve():
     path, path_img = algorithm.main()
     if json_data["GUI"]:
         visual(img,detect_playground_img,robotImg,objects_img,array,path_img)
+        #turtle_animation.animate_path(path)
 
     if not send:
         send_solution.main(path)

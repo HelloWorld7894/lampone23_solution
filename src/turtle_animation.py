@@ -15,9 +15,22 @@ def animate_path(path):
     t.forward(-10)
     t.left(90)
     t.forward(70)
-    for i in path
+    t.right(90)
+    for i in path:
+        time.sleep(1)
+        if i == "F":
+            if t.heading() % 360 == 180:
+                t.forward(75)
+            if t.heading() % 360 == 90:
+                t.forward(60)
+            if t.heading() % 360 == 0:
+                t.forward(75)
+            if t.heading() % 360 == 270:
+                t.forward(60)
+        if i == "B":
+            t.forward(-60)
+        if i == "L":
+            t.left(90)
+        if i == "R":
+            t.right(90)
     wn.mainloop()
-    
-
-
-animate_path()
