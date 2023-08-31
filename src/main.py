@@ -25,8 +25,9 @@ parser = argparse.ArgumentParser(
                     description='xd',
                     epilog='Text at the bottom of help')
 parser.add_argument('--v', '--verbose', action='store_true', help='Enable verbose mode')
+parser.add_argument('--ng', '--no-gui', action='store_true', help='disable GUI')
 logging = False
-
+noGUI = False
 print(PATH)
 if "src" in PATH:
     PATH = PATH.replace("/src", "")
@@ -35,11 +36,15 @@ if "src" in PATH:
 def solve():
     #some logging stuff
     global logging
+    global noGUI
     args = parser.parse_args()
     if args.v:
         logging = True
         print("Logging set to true")
-
+    if args.ng:
+        noGUI = True
+        print("GUI set to False")
+        
     fig, axs = plt.subplots(2, 3, figsize=(15, 10))
 
     img = load_frame.main(PATH + "/assets/image.png", verbose=logging)
@@ -69,7 +74,7 @@ def solve():
     axs[1][1].imshow(array, cmap=cmap)
     axs[1][1].set_title('8x8 Array')
     
-    if logging:
+    if not noGUI:
 
         plt.tight_layout()
         plt.show()
