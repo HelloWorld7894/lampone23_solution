@@ -1,6 +1,5 @@
 # other imports
 import numpy as np
-
 import translate_path
 
 

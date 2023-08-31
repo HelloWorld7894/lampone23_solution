@@ -54,7 +54,7 @@ def solve():
 
     fig, axs = plt.subplots(2, 3, figsize=(15, 10))
 
-    img = load_frame.main(PATH + "/assets/image.png", verbose=logging)
+    img = load_frame.main(json_data["resource"], verbose=logging)
     empty_image = load_frame.main(PATH + "/assets/image_empty.png")
     
     axs[0][0].imshow(img)
@@ -82,12 +82,12 @@ def solve():
     axs[1][1].set_title('8x8 Array')
     
     if logging:
-
         plt.tight_layout()
         plt.show()
 
     path = generate_path.main(array, logging)
-    #send_solution.main(path)
+    if send:
+        send_solution.main(path)
 
 
 if __name__ == "__main__":

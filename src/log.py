@@ -3,7 +3,7 @@ from termcolor import colored
 #set logging values
 LOG_TRUE = colored("DONE", "green")
 LOG_FALSE = colored("FAILED", "red")
-LOG_WARNING = colored("FAILED", "red")
+LOG_WARNING = colored("WARNING", "yellow")
 
 def log_true(message):
     print(f"{message} [{LOG_TRUE}]")
