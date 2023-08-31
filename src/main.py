@@ -53,9 +53,10 @@ def solve():
         logging = True
         print("Logging set to true")
 
-    
-
-    img = load_frame.main(PATH + json_data["resource"], verbose=logging)
+    if json_data["resource"] == "":
+        img = load_frame.main(verbose=logging)
+    else:
+        img = load_frame.main(PATH + json_data["resource"], verbose=logging)
     empty_image = load_frame.main(PATH + "/assets/image_empty.png")
 
     playground, detect_playground_img = detect_playground.main(empty_image, logging)
