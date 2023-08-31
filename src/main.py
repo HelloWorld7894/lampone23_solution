@@ -48,13 +48,14 @@ def solve():
     global logging
     global noGUI
     args = parser.parse_args()
+    
     if args.v:
         logging = True
         print("Logging set to true")
 
     fig, axs = plt.subplots(2, 3, figsize=(15, 10))
 
-    img = load_frame.main(PATH + "/assets/image.png", verbose=logging)
+    img = load_frame.main(verbose=logging)
     empty_image = load_frame.main(PATH + "/assets/image_empty.png")
     
     axs[0][0].imshow(img)
