@@ -64,6 +64,7 @@ def main(playground_matrix, verbose=False):
                     bonus_nodes.append(bonus_node)
 
                     ideal_path.insert(ideal_path.index(node) + 1, bonus_node)
+                    ideal_path.insert(ideal_path.index(bonus_node) + 1, node)
 
                     find_nearby_bonus_nodes(bonus_node)
 
