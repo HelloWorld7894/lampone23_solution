@@ -3,7 +3,7 @@ from matplotlib.colors import ListedColormap
 import matplotlib
 matplotlib.use("TkAgg")
 
-def visualization(original_img,detect_playground_img,detect_robot_img,recognize_objects_img,analyze_playground,path_img,animIMG):
+def visualization(original_img,detect_playground_img,detect_robot_img,recognize_objects_img,analyze_playground,path_img):
     fig, axs = plt.subplots(2, 4, figsize=(15, 10))
     colors = ['white', 'black', 'green', 'blue', 'red','orange']
     cmap = ListedColormap(colors)
@@ -24,7 +24,5 @@ def visualization(original_img,detect_playground_img,detect_robot_img,recognize_
     axs[1][1].imshow(path_img, cmap=cmap_path)
     axs[1][1].set_title('PATH')
     
-    axs[1][2].imshow(animIMG)
-    axs[1][2].set_title('Animation')
     plt.tight_layout()
     plt.show()
