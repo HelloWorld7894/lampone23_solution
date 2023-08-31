@@ -60,18 +60,30 @@ class ModifiedDFS(Generic):
 
                 new_x, new_y = node[0] + dx, node[1] + dy
 
-                if 0 <= new_x < rows and 0 <= new_y < cols and self.playground_matrix[new_x][new_y] != 4 and not (new_x, new_y) in ideal_path:
+                if 0 <= new_x < rows and 0 <= new_y < cols and self.playground_matrix[new_x][new_y] != 4 and not (new_x,
+                                                                                                  new_y) in ideal_path:
                     new_value = self.playground_matrix[new_x][new_y]
+                    new_node = (new_x, new_y)
 
                     if new_value == 3 or new_value == 5:
-                        bonus_node = (new_x, new_y)
+                        bonus_nodes.append(new_node)
 
-                        bonus_nodes.append(bonus_node)
+                        ideal_path.insert(ideal_path.index(node) + 1, new_node)
+                        ideal_path.insert(ideal_path.index(new_node) + 1, node)
 
-                        ideal_path.insert(ideal_path.index(node) + 1, bonus_node)
-                        ideal_path.insert(ideal_path.index(bonus_node) + 1, node)
+                        find_nearby_bonus_nodes(new_node)
 
-                        find_nearby_bonus_nodes(bonus_node)
+                    if new_value == 0:
+                        for dy, dx in directions:
+                            new_x, new_y = new_x + dx, new_y + dy
+
+                            if 0 <= new_x < rows and 0 <= new_y < cols and self.playground_matrix[new_x][new_y] != 4 and not (new_x,
+                                                                                                              new_y) in ideal_path:
+                                new_value = self.playground_matrix[new_x][new_y]
+
+                                if new_value == 5:
+                                    ideal_path.insert(ideal_path.index(node) + 1, new_node)
+                                    ideal_path.insert(ideal_path.index(new_node) + 1, node)
 
         start_pos_raw = np.where(self.playground_matrix == 1)
         end_pos_raw = np.where(self.playground_matrix == 2)
