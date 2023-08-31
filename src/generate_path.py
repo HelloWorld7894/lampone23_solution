@@ -91,7 +91,7 @@ def main(playground_matrix, heading, verbose=False):
 
     for node in ideal_path:
         find_nearby_bonus_nodes(node)
-        playground_matrix_final[node[0]][node[1]] = -1
+        playground_matrix_final[node[0]][node[1]] = 6
     
     #for path translation
     translated_path = translate_path.main(heading, ideal_path, verbose)
