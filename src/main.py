@@ -68,7 +68,7 @@ def solve():
     path, path_img = generate_path.main(array, robot[1], logging)
     if not send:
         send_solution.main(path)
-    if True:
+    if json_data["GUI"]:
         visual(img,detect_playground_img,robotImg,objects_img,array,path_img,path)
 
 if __name__ == "__main__":
