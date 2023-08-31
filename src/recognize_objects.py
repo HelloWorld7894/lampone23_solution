@@ -119,7 +119,7 @@ def main(img, verbose = False):
 def visualisation(img, x, bgr = False):
     bgr_img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
     objects = ["ctverecek","ctverecek","ctverecek","hvezdicka"]
-    barvicky = [(255,0,0),(0,255,0),(0,0,255),(0,0,255)]
+    barvicky = [(255,0,0),(0,150,0),(0,0,255),(0,100,100)]
     thickness = 2
 
     for i in range(len(x)):
