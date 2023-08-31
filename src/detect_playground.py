@@ -34,7 +34,7 @@ def main(empty_image, verbose = False):
             
         Ysort.append([[min(cordX),min(cordY)],[max(cordX),max(cordY)]])
     Ysort.sort(key=lambda x: (x[0][1])) 
-    # X sort and creating 8x8x2x2 4D aray lol this code is fucked shit but it sorting
+    # X sort and creating 8x8x2x2 4D aray but it sorting
     for i in range(8):
         if i == 0:
             Xsort = Ysort[:8]

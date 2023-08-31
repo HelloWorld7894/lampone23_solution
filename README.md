@@ -3,6 +3,8 @@ program se nastavuje buď přes terminál, nebo pomocí .json souboru.
 Commandy přes terminál vypadají takhle:
 (NOTE: k tomu abyste spouštěli main.py přes terminál, spusťte `chmod a+x main.py`)
 
+# Explanation
+
 ## přes terminál
 
 ```
@@ -22,3 +24,11 @@ main.py --v
 ```
 
 když je `resource` prázdný, tak se bere feed z URL, standartně je `resource` nastavený na `"/assets/image.png"`
+
+# Diagram programu
+
+![diagram](./doc/diagram.bmp)
+
+# Jak vypadá hrací pole
+
+![diagram](./assets/imagewgreen.png)

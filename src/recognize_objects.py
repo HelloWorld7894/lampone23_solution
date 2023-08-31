@@ -68,7 +68,9 @@ def main(img, verbose = False):
     output = []
 
     stars = dan.main(img_red)
+
     #print(stars)
+
 
     for i, binary_array in enumerate(insert):
         num_labels, label, stats, centroids = cv2.connectedComponentsWithStats(binary_array.astype(np.uint8))
@@ -94,6 +96,9 @@ def main(img, verbose = False):
         output.append(labels)
     output.append(star_label)
 
+    viz = visualisation(img,output)
+    imgs.append(viz)
+    imgs_titles.append(f"green {viz.shape}")
 
     """showing subplots for debug and development"""
     if verbose:
@@ -144,12 +149,12 @@ if __name__ == "__main__":
     #     main(skimage.io.imread(i, as_gray=False)[270:760,650:1333,:],True)
     
     img = load_frame.main()
-    x, y = main(img,False)
+    x, y = main(img,True)
 
     img_out = visualisation(img,x,True)
 
-    cv2.imshow('bleueh',img_out)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    # cv2.imshow('bleueh',img_out)
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
     
 
