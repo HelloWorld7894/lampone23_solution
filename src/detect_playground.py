@@ -6,7 +6,7 @@ import matplotlib
 matplotlib.use("TkAgg") #for linux users
 import numpy as np
 import load_frame
-from termcolor import colored
+from log import log_true, log_false, log_warn
 
 
 def main(empty_image, verbose = False):
@@ -48,7 +48,7 @@ def main(empty_image, verbose = False):
             return_img = cv.rectangle(empty_image, SortedDots[y][x][0], SortedDots[y][x][1], (0,0,255), 3)
 
     if verbose:
-        print(colored("background detected!", "green"))
+        log_true("background detected")
     return SortedDots, return_img 
 
 

@@ -3,7 +3,7 @@ import cv2 as cv
 import skimage
 import numpy as np
 import matplotlib.pyplot as plt
-from termcolor import colored
+from log import log_true, log_false, log_warn
 from colorama import Fore
 
 def main(path = "", verbose = False):
@@ -24,20 +24,20 @@ def main(path = "", verbose = False):
             try:
                 image = skimage.io.imread(URL, as_gray=False)
                 errored = False
-                print(colored("fetch succeeded", "green"))
+                log_true("fetch succeeded")
             except:
                 if timeout == 5:
-                    print(colored("timeout limit exceeded, aborting", "red"))
+                    log_false("timeout limit exceeded, aborting", "red")
                     exit(1)
 
-                print(colored("fetch failed, repeating", "yellow"))
+                log_warn("fetch failed, repeating", "yellow")
                 errored = True
                 timeout += 1
             
     else:
         image = skimage.io.imread(path, as_gray=False)
         if verbose:
-            print(colored("Image loaded succesfuly", "green"))
+            log_true("Image loaded succesfuly")
 
     if image.shape[2] == 4:
         image = image[:, :, :3]

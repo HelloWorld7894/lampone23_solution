@@ -11,8 +11,8 @@ import matplotlib.pyplot as plt
 import sys
 import argparse
 import os
-import termcolor
-from matplotlib.colors import ListedColormap
+from log import log_true, log_false, log_warn
+import json
 
 from matplotlib.colors import ListedColormap
 import matplotlib
@@ -25,12 +25,23 @@ parser = argparse.ArgumentParser(
                     description='xd',
                     epilog='Text at the bottom of help')
 parser.add_argument('--v', '--verbose', action='store_true', help='Enable verbose mode')
-logging = False
 
-print(PATH)
 if "src" in PATH:
     PATH = PATH.replace("/src", "")
-    print(PATH)
+
+#loading json data
+json_data = json.load(open(PATH + "/settings.json"))
+
+log_true("loaded JSON file")
+if json_data["verbose"]:
+    logging = True
+else:
+    logging = False
+
+if json_data["testing"]:
+    send = True
+else:
+    send = False
 
 def solve():
     #some logging stuff
@@ -79,5 +90,4 @@ def solve():
 
 
 if __name__ == "__main__":
-    print(sys.argv)
     solve()

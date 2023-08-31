@@ -4,7 +4,7 @@ import skimage
 import numpy as np
 import matplotlib.pyplot as plt
 import math
-from termcolor import colored
+from log import log_true, log_false, log_warn
 import time
 import load_frame
 
@@ -22,15 +22,15 @@ def main(image, verbose = False):
         if len(corners) == 0:
             if timeout == 5:
                 if verbose:
-                    print(colored("timeout limit exceeded, aborting", "red"))
+                    log_false("timeout limit exceeded, aborting")
                 exit(1)
             if verbose:
-                print(colored("did not found the robot, repeating...", "yellow"))
+                log_warn("did not found the robot, repeating...")
             timeout += 1
             time.sleep(1)
         else:
             if verbose:
-                print(colored("found the robot!", "green"))
+                log_true("found the robot")
             bot_not_found = False
     image_with_markers = cv2.aruco.drawDetectedMarkers(image, corners, ids)
     corners = corners[0][0].astype(np.int32)

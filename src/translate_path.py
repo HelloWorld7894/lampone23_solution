@@ -4,7 +4,7 @@ import numpy as np
 import sys
 import argparse
 import os
-from termcolor import colored
+from log import log_true, log_false, log_warn
 
 def main(heading, path_array, verbose = False):
     curr_heading = heading
@@ -57,7 +57,7 @@ def main(heading, path_array, verbose = False):
             curr_heading = "E"
 
     if verbose:
-        print(colored("generated robot commands!", "green"))
+        log_true("generated robot commands")
         print("commands: " + out_string)
     return out_string
 
