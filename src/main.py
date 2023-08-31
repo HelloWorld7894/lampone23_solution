@@ -65,9 +65,9 @@ def solve():
     robot, robotImg = detect_robot.main(img_for_robot, logging)
     objects, objects_img = recognize_objects.main(img, logging)
     array = analyze_playground.main(playground, robot, objects, logging)
-        
-
-    path, path_img = ModifiedDFS(array, robot[1], logging).main()
+    print(array)
+    algorithm = ModifiedDFS(array, robot[1], logging)
+    path, path_img = algorithm.main()
     if json_data["GUI"]:
         visual(img,detect_playground_img,robotImg,objects_img,array,path_img)
 
