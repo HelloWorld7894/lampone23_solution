@@ -63,7 +63,7 @@ def solve():
     playground, detect_playground_img = detect_playground.main(empty_image, logging)
     img_for_robot = img.copy()
     robot, robotImg = detect_robot.main(img_for_robot, logging)
-    objects, objects_img = recognize_objects.main(img, logging)
+    objects, objects_img = recognize_objects.main(img, json_data, logging)
     array = analyze_playground.main(playground, robot, objects, logging)
     print(array)
     algorithm = ModifiedDFS(array, robot[1], logging)

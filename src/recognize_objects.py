@@ -12,7 +12,7 @@ import termcolor
 
 import recognize_same_color as dan
 
-def main(img, verbose = False):
+def main(img, json_data, verbose = False):
     rows = 2
     columns = 4
     imgs = []
@@ -86,10 +86,10 @@ def main(img, verbose = False):
 
             isntstar = True
             for star in stars:
-                if star[0] > leftmost and star[0] < leftmost + width and star[1] > topmost and star[1] < topmost + height and i == 2 and area > 200:
+                if star[0] > leftmost and star[0] < leftmost + width and star[1] > topmost and star[1] < topmost + height and i == 2 and area > json_data["star_threshold"]:
                     star_label.append([round(centroid_x),round(centroid_y),leftmost,topmost,width,height])
                     isntstar = False
-            if area > 200 and isntstar:
+            if area > json_data["threshold"] and isntstar:
                 labels.append([round(centroid_x),round(centroid_y),leftmost,topmost,width,height])
                 if verbose:
                     print(f"Label {label}: Area={area}, Bounding Box=({leftmost}, {topmost}, {width}, {height}), Centroid=({centroid_x}, {centroid_y})")
