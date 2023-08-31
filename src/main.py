@@ -13,6 +13,10 @@ import argparse
 import os
 import termcolor
 
+from matplotlib.colors import ListedColormap
+import matplotlib
+matplotlib.use("TkAgg")
+
 PATH = os.getcwd()
 
 parser = argparse.ArgumentParser(
@@ -22,9 +26,10 @@ parser = argparse.ArgumentParser(
 parser.add_argument('--v', '--verbose', action='store_true', help='Enable verbose mode')
 logging = False
 
+print(PATH)
 if "src" in PATH:
     PATH = PATH.replace("/src", "")
-
+    print(PATH)
 
 def solve():
     #some logging stuff
@@ -33,13 +38,12 @@ def solve():
     if args.v:
         logging = True
         print("Logging set to true")
-        
-    fig, axs = plt.subplots(2, 3, figsize=(15, 10))
-    
-    img = load_frame.main("assets/", verbose=logging)
-    empty_image = load_frame.main("assets/image_empty.png")
-    img_log = np.zeros((640, 480, 3))
 
+    fig, axs = plt.subplots(2, 3, figsize=(15, 10))
+
+    img = load_frame.main(PATH + "/assets/image.png", verbose=logging)
+    empty_image = load_frame.main(PATH + "/assets/image_empty.png")
+    
     axs[0][0].imshow(img)
     axs[0][0].set_title('orichinal')
     
@@ -59,15 +63,18 @@ def solve():
     
     array = analyze_playground.main(playground, robot, objects, logging)
     #visualization of 2d np aray
+    colors = ['white', 'black', 'green', 'blue', 'red','orange']
+    cmap = ListedColormap(colors)
+    axs[1][1].imshow(array, cmap=cmap)
+    axs[1][1].set_title('8x8 Array')
     
-    
-    #path = generate_path.main(array, logging)
-    #send_solution.main(path)
-    plt.tight_layout()
-    plt.show()
     if logging:
-        cv2.imshow("logging", img_log)
-        cv2.waitKey(0)
+
+        plt.tight_layout()
+        plt.show()
+
+    path = generate_path.main(array, logging)
+    #send_solution.main(path)
 
 
 if __name__ == "__main__":

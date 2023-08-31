@@ -36,7 +36,8 @@ def main(path = "", verbose = False):
             
     else:
         image = skimage.io.imread(path, as_gray=False)
-        print(colored("Image loaded succesfuly", "green"))
+        if verbose:
+            print(colored("Image loaded succesfuly", "green"))
 
     imgray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
     ret, thresh = cv.threshold(imgray, 127, 255, 0)
