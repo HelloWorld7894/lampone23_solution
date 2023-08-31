@@ -2,5 +2,5 @@
     "verbose": false,
     "testing": true,
     "resource": "",
-    "GUI": false
+    "GUI": true
 }

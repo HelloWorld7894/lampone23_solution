@@ -8,14 +8,12 @@ from termcolor import colored
 def rectangles_intersect(rect1, rect2):
     x1, y1, w1, h1 = rect1
     x2, y2, w2, h2 = rect2
-
     if x1 > x2 + w2 or x2 > x1 + w1:
         return False
-
     if y1 > y2 + h2 or y2 > y1 + h1:
         return False
-
     return True
+
 
 def main(playground,robot,objects, verbose = False):
     BestArray = [np.zeros((len(playground),len(playground[0])))]
