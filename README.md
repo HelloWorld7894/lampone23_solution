@@ -28,3 +28,7 @@ když je `resource` prázdný, tak se bere feed z URL, standartně je `resource`
 # Diagram programu
 
 ![diagram](./doc/diagram.bmp)
+
+# Jak vypadá hrací pole
+
+![diagram](./assets/imagewgreen.png)
