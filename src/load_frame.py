@@ -42,6 +42,17 @@ def main(path = "", verbose = False):
     if image.shape[2] == 4:
         image = image[:, :, :3]
 
+    # Example intrinsic matrix (K)
+    K = np.array([[800.0, 0.0, 960.0],
+                [0.0, 600.0, 540.0],
+                [0.0, 0.0, 1.0]])
+
+    # Example distortion coefficients (D)
+    D = np.array([0.03, -0.05, 0.002, 0.002])
+
+    map1, map2 = cv.fisheye.initUndistortRectifyMap(K, D, np.eye(3), K, (image.shape[1], image.shape[0]), cv.CV_16SC2)
+    image = cv.remap(image, map1, map2, interpolation=cv.INTER_LINEAR, borderMode=cv.BORDER_CONSTANT)
+
     imgray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
     ret, thresh = cv.threshold(imgray, 127, 255, 0)
 
