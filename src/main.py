@@ -69,9 +69,7 @@ def solve():
 
     path, path_img = ModifiedDFS(array, robot[1], logging).main()
     if json_data["GUI"]:
-        img_for_anim = img.copy()
-        #animIMG = return_anim_images(img_for_anim, path,playground, array, robot[1])
-        visual(img,detect_playground_img,robotImg,objects_img,array,path_img,None)
+        visual(img,detect_playground_img,robotImg,objects_img,array,path_img)
 
     if not send:
         send_solution.main(path)
