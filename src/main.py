@@ -65,11 +65,11 @@ def solve():
     objects, objects_img = recognize_objects.main(img, logging)
     array = analyze_playground.main(playground, robot, objects, logging)
         
-    path = generate_path.main(array, logging)
+    path, path_img = generate_path.main(array, logging)
     if not send:
         send_solution.main(path)
     if True:
-        visual(img,detect_playground_img,robotImg,objects_img,array,path)
+        visual(img,detect_playground_img,robotImg,objects_img,array,path_img)
 
 if __name__ == "__main__":
     solve()

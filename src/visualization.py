@@ -18,5 +18,6 @@ def visualization(original_img,detect_playground_img,detect_robot_img,recognize_
     cmap = ListedColormap(colors)
     axs[1][1].imshow(analyze_playground, cmap=cmap)
     axs[1][1].set_title('8x8 Array')
+    print(path)
     plt.tight_layout()
     plt.show()
