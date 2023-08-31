@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 
 #own imports
-import analyze_playground, detect_playground, detect_robot, generate_path, load_frame, recognize_objects, send_solution
+import analyze_playground, detect_playground, detect_robot, load_frame, recognize_objects, send_solution
+from generate_path import ModifiedDFS
 
 #other imports
 import cv2
@@ -65,7 +66,7 @@ def solve():
     objects, objects_img = recognize_objects.main(img, logging)
     array = analyze_playground.main(playground, robot, objects, logging)
         
-    path, path_img = generate_path.main(array, robot[1], logging)
+    path, path_img = ModifiedDFS(array, robot[1], logging).main()
     if not send:
         send_solution.main(path)
     if json_data["GUI"]:
