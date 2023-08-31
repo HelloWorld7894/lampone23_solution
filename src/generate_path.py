@@ -73,8 +73,6 @@ class ModifiedDFS(Generic):
 
                         find_nearby_bonus_nodes(bonus_node)
 
-                    return
-
         start_pos_raw = np.where(self.playground_matrix == 1)
         end_pos_raw = np.where(self.playground_matrix == 2)
 
