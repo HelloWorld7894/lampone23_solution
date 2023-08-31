@@ -65,7 +65,7 @@ def solve():
     objects, objects_img = recognize_objects.main(img, logging)
     array = analyze_playground.main(playground, robot, objects, logging)
         
-    path = generate_path.main(array, logging)
+    path = generate_path.main(array, robot[1], logging)
     if not send:
         send_solution.main(path)
     if True:

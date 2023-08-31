@@ -3,7 +3,7 @@ import numpy as np
 import translate_path
 
 
-def main(playground_matrix, verbose=False):
+def main(playground_matrix, heading, verbose=False):
     def is_valid(x, y, matrix, visited):
         rows = matrix.shape[0]
         cols = matrix.shape[1]
@@ -89,4 +89,8 @@ def main(playground_matrix, verbose=False):
 
     for node in ideal_path:
         find_nearby_bonus_nodes(node)
+    
+    #for path translation
+    translated_path = translate_path.main(heading, ideal_path, verbose)
 
+    return translated_path
