@@ -2,11 +2,13 @@
 import numpy as np
 import translate_path
 
+
 class Generic:
-    def __init__(self, playground_matrix, heading, verbose = False):
+    def __init__(self, playground_matrix, heading, verbose=False):
         self.playground_matrix = playground_matrix
         self.heading = heading
         self.verbose = verbose
+
 
 class ModifiedDFS(Generic):
     def main(self):
@@ -62,16 +64,25 @@ class ModifiedDFS(Generic):
 
                 if 0 <= new_x < rows and 0 <= new_y < cols and self.playground_matrix[new_x][new_y] != 4 and not (new_x, new_y) in ideal_path:
                     new_value = self.playground_matrix[new_x][new_y]
+                    new_node = (new_x, new_y)
 
                     if new_value == 3 or new_value == 5:
-                        bonus_node = (new_x, new_y)
+                        bonus_nodes.append(new_node)
 
-                        bonus_nodes.append(bonus_node)
+                        ideal_path.insert(ideal_path.index(node) + 1, new_node)
+                        ideal_path.insert(ideal_path.index(new_node) + 1, node)
 
-                        ideal_path.insert(ideal_path.index(node) + 1, bonus_node)
-                        ideal_path.insert(ideal_path.index(bonus_node) + 1, node)
+                    if new_value == 0:
+                        for dy, dx in directions:
+                            new_x_2, new_y_2 = new_x + dx, new_y + dy
 
-                        find_nearby_bonus_nodes(bonus_node)
+                            if 0 <= new_x_2 < rows and 0 <= new_y_2 < cols and self.playground_matrix[new_x_2][new_y_2] != 4 and not (new_x_2, new_y_2) in ideal_path:
+
+                                new_value = self.playground_matrix[new_x_2][new_y_2]
+
+                                if new_value == 5:
+                                    ideal_path.insert(ideal_path.index(node) + 1, new_node)
+                                    ideal_path.insert(ideal_path.index(new_node) + 1, node)
 
         start_pos_raw = np.where(self.playground_matrix == 1)
         end_pos_raw = np.where(self.playground_matrix == 2)
@@ -96,12 +107,13 @@ class ModifiedDFS(Generic):
         for node in ideal_path:
             find_nearby_bonus_nodes(node)
             playground_matrix_final[node[0]][node[1]] = 6
-        
-        #for path translation
+
+        # for path translation
         translated_path = translate_path.main(self.heading, ideal_path, self.verbose)
 
         return translated_path, playground_matrix_final
-    
+
+
 class MyOwnSearch(Generic):
     def main(self):
         pass
