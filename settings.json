@@ -1,7 +1,7 @@
 {
     "verbose": false,
     "testing": true,
-    "resource": "",
+    "resource": "/assets/image (1).png",
     "GUI": true,
     "star_threshold": 100,
     "threshold": 200
