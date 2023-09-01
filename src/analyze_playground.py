@@ -4,6 +4,7 @@ import skimage
 import numpy as np
 import matplotlib.pyplot as plt
 from termcolor import colored
+import math
 
 def rectangles_intersect(rect1, rect2):
     x1, y1, w1, h1 = rect1
@@ -50,5 +51,34 @@ def main(playground,robot,objects, verbose = False):
                         BestArray[0][Y][X] = 5 #Blue rects   
     return BestArray[0]
             
-            
-       
+
+
+#just for testing        
+def main2(playground,robot,objects, verbose = False):
+    len(playground)
+    print(robot)
+    print(objects)
+
+    side_len = int(math.sqrt(len(playground)) - 1)
+
+    field = np.zeros((side_len, side_len))
+
+    spacing_X = 0
+    spacing_Y = 0
+
+    for i, coord in enumerate(playground):
+        if i == len(playground) - 1:
+            break
+
+        spacing_X += abs(playground[i + 1][0] - coord[0])
+        spacing_Y += abs(playground[i + 1][1] - coord[1])
+
+    spacing_X = int(spacing_X / len(playground))
+    spacing_Y = int(spacing_Y / len(playground))
+
+    print(spacing_X)
+    print(spacing_Y)
+
+    #objects notation cX, cY, X, Y, W, H
+
+    
