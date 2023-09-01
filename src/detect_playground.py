@@ -177,3 +177,4 @@ def main2(image, verbose = False):
 
 if __name__ == "__main__":
     image = load_frame.main("./assets/image_all.png")
+    main2(image)
