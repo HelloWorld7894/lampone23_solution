@@ -38,3 +38,8 @@ když je `resource` prázdný, tak se bere feed z URL, standartně je `resource`
 ![output 1](./doc/Figure_1.png)
 
 ![output 2](./doc/Figure_2.png)
+
+---
+# Odkazy
+
+[link k prezentaci](https://github.com/HelloWorld7894/lampone23_solution/blob/main/doc/presentation_lampone2023.pdf)
