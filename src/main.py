@@ -69,11 +69,11 @@ def solve():
 
     algorithm = ModifiedDFS(array, robot[1], logging)
     path, path_img = algorithm.main()
+
+    send_solution.main(path)
+
     if json_data["GUI"]:
         visual(img,detect_playground_img,robotImg,objects_img,array,path_img)
         #turtle_animation.animate_path(path)
-
-    if not send:
-        send_solution.main(path)
 if __name__ == "__main__":
     solve()

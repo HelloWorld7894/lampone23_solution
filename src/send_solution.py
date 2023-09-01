@@ -2,7 +2,7 @@ import socket
 from colorama import Fore
 
 
-UDP_IP = "192.168.109.22"
+UDP_IP = "192.168.100.22"
 UDP_PORT = 9999
 
 def main(message, verbose = False):

@@ -83,7 +83,9 @@ def main(heading, path_array, verbose = False):
     if verbose:
         log_true("generated robot commands")
         print("commands: " + out_string)
-        
+
+    out_string += "F"
+
     return out_string
 
 if __name__ == "__main__":
