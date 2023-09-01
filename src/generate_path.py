@@ -53,7 +53,7 @@ class ModifiedDFS(Generic):
             dfs(start[0], start[1], [], 0)
             return paths
 
-        def find_nearby_bonus_nodes(node, path):
+        def find_nearby_bonus_nodes(node):
             directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
 
             for dx, dy in directions:
@@ -62,29 +62,27 @@ class ModifiedDFS(Generic):
 
                 new_x, new_y = node[0] + dx, node[1] + dy
 
-                if 0 <= new_x < rows and 0 <= new_y < cols and self.playground_matrix[new_x][new_y] != 4 and not (new_x, new_y) in path:
+                if 0 <= new_x < rows and 0 <= new_y < cols and self.playground_matrix[new_x][new_y] != 4 and not (new_x, new_y) in ideal_path:
                     new_value = self.playground_matrix[new_x][new_y]
                     new_node = (new_x, new_y)
 
                     if new_value == 3 or new_value == 5:
                         bonus_nodes.append(new_node)
 
-                        path.insert(path.index(node) + 1, new_node)
-                        path.insert(path.index(new_node) + 1, node)
+                        ideal_path.insert(ideal_path.index(node) + 1, new_node)
+                        ideal_path.insert(ideal_path.index(new_node) + 1, node)
 
                     if new_value == 0:
                         for dy, dx in directions:
                             new_x_2, new_y_2 = new_x + dx, new_y + dy
 
-                            if 0 <= new_x_2 < rows and 0 <= new_y_2 < cols and self.playground_matrix[new_x_2][new_y_2] != 4 and not (
-                                                                                                                     new_x_2,
-                                                                                                                     new_y_2) in path:
+                            if 0 <= new_x_2 < rows and 0 <= new_y_2 < cols and self.playground_matrix[new_x_2][new_y_2] != 4 and not (new_x_2, new_y_2) in ideal_path:
 
                                 new_value = self.playground_matrix[new_x_2][new_y_2]
 
                                 if new_value == 5:
-                                    path.insert(path.index(node) + 1, new_node)
-                                    path.insert(path.index(new_node) + 1, node)
+                                    ideal_path.insert(ideal_path.index(node) + 1, new_node)
+                                    ideal_path.insert(ideal_path.index(new_node) + 1, node)
 
         start_pos_raw = np.where(self.playground_matrix == 1)
         end_pos_raw = np.where(self.playground_matrix == 2)
@@ -100,37 +98,18 @@ class ModifiedDFS(Generic):
 
         sorted_paths = sorted(paths, key=lambda x: x[1])
 
+        ideal_path = sorted_paths[0][0]
+
         bonus_nodes = []
 
         playground_matrix_final = self.playground_matrix.copy()
 
-        processed_paths = []
-
-        for i in range(0, len(sorted_paths)):
-            path_cost = 0
-
-            for node in sorted_paths[i][0]:
-                find_nearby_bonus_nodes(node, sorted_paths[i][0])
-
-                node_value = self.playground_matrix[node[0]][node[1]]
-
-                if node_value == 3:
-                    path_cost -= 2
-                elif node_value == 5:
-                    path_cost -= 5
-                else:
-                    path_cost += 1
-
-            path_cost -= 1
-            processed_paths.append((sorted_paths[i][0], path_cost))
-
-        ideal_path = sorted(processed_paths, key=lambda x: x[1])[0]
-
-        for node in ideal_path[0]:
+        for node in ideal_path:
+            find_nearby_bonus_nodes(node)
             playground_matrix_final[node[0]][node[1]] = 6
 
         # for path translation
-        translated_path = translate_path.main(self.heading, ideal_path[0], self.verbose)
+        translated_path = translate_path.main(self.heading, ideal_path, self.verbose)
 
         return translated_path, playground_matrix_final
 
